@@ -1,0 +1,54 @@
+.bg-red{
+    background-color: #ED5648;
+}
+.bg-blue{
+    background-color: #0F3462;
+}
+.text-red{
+    color : #ED5648;
+}
+.btn-red{
+    background-color: #ED5648;
+    color: #fff;
+}
+.btn-red:hover{
+    background-color: #6b241d;
+    color: #fff;
+}
+.btn-blue{
+    background-color: #0F3462;
+    color: #fff;
+}
+.btn-blue:hover{
+    color: #fff;
+    background-color: #061629;
+}
+.navbar-brand{
+    font-weight: bold;
+    font-size: 22px;
+}
+.text-white{
+    color : #fff;
+}
+.hero{
+    min-height: 400px;
+    background-image: url("../images/hero-bg2.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.text-blue{
+    color : #0F3462;
+}
+.industry{
+    min-height: 300px;
+    background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("../images/hero-img-2.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.saperator{
+    background-color: #ED5648;
+    width: 150px;
+    height: 5px;
+    margin: 0 auto;
+    /* div horizontal center */
+}
