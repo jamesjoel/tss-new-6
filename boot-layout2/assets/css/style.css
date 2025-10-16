@@ -1,0 +1,44 @@
+body{
+    background-color: #ccc;
+}
+.bg-blue{
+    background-color: #06294D;
+}
+.bg-blue-2{
+    background-color: #092E56;
+}
+.btn-yellow{
+    background-color: #FEC600;
+}
+.text-yellow{
+    color: #FEC600;
+}
+.text-blue{
+    color: #06294D !important;
+}
+#menu .nav .nav-item .nav-link:hover{
+    color: #FEC600 !important;
+}
+.hero{
+    height: 550px;
+    background-image: url("../images/hero-bg-3.jpg");
+    background-size: 100% 100%;
+}
+.card-bottom{
+    width: 100%;
+    /* background-color: red; */
+    display: flex;
+}
+.card-bottom-left{
+    width: 70%;
+}
+.card-bottom-right{
+    width: 30%;
+}
+.text-gray{
+    color: #8B8B8B;
+}
+.card-bottom img{
+    height: 50px;
+    width: 50px;
+}

@@ -1,0 +1,12 @@
+.hero{
+    min-height: 600px;
+    background-image: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url("../images//hero-bg-3.jpg");
+    background-size: 100% 100%;
+}
+.navbar{
+    box-shadow: 0 0 20px #fff;
+    background-color: rgba(0, 0, 0, .2);
+}
+.hero-card{
+    background-color: rgba(3, 97, 88, 0.4);
+}
