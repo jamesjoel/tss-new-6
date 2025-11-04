@@ -60,7 +60,7 @@ task 3 ----- mark(89)
 
 task 4 ----- family(5000, 3000, 4000)
     condi 1 ------------ total yealy 150000 less --- BPL
-    condi 2 ------------ total yealy 151000 to 300000 less --- Avg
+    condi 2 ------------ total yealy 150001 to 300000 less --- Avg
     condi 3 ------------ total yealy 300001 to 1000000 less --- Middle
     condi 4 ------------ total yealy 1000001 to 2000000 less --- Upper Middle
     condi 4 ------------ total yealy 2000001 more --- High
@@ -69,5 +69,13 @@ task 4 ----- family(5000, 3000, 4000)
 family(8000, 6000, 7000)
 family(8000, 6000) --- third parameter default 0
 family(8000) --- second & third parameter default 0
+
+
+
+let update = ()=>{
+    
+    axios.put("", { prompt : "What...", reply : "" })
+    
+}
 
 */
