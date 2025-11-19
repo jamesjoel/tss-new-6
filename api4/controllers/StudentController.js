@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 mongoose.connect("mongodb+srv://jamessteppingstone_db_user:cLonaHpNNTvDys7o@cluster0.nnogiy2.mongodb.net/?appName=Cluster0");
 
 let StuSchema = mongoose.Schema({
@@ -15,4 +15,24 @@ let GetAllStudent = async(req, res)=>{
     res.send(data)
 }
 
+
 export {GetAllStudent}
+
+import mongoose from "mongoose";
+mongoose.connection("url");
+
+
+let Schema=mongoose.Schema({
+        name:String,
+        city:String,
+        age:Number
+ }, {collection:"projectname"});
+
+
+let get=async(req,res)=>{
+    let dat=await  StuModel.find();
+    res.send(dat);
+};
+export{get};
+
+
