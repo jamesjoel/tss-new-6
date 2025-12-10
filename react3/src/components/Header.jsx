@@ -18,6 +18,12 @@ let Header = ()=>{
                         <li className="nav-item">
                             <NavLink to="/contact" className="nav-link">Contact Us</NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink to="/help" className="nav-link">Help</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to="/comp1" className="nav-link">Comp1</NavLink>
+                        </li>
                     </ul>
                 </div>
             </div>
