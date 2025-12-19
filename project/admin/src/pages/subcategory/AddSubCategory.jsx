@@ -3,6 +3,7 @@ import axios from 'axios'
 import { API_URL } from '../../config/API'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
+import SubCateSchema from '../../schema/SubCategorySchema'
 
 const AddSubCategory = () => {
     let navigate = useNavigate();
@@ -16,6 +17,7 @@ const AddSubCategory = () => {
     },[])
 
     let SubCateFrm = useFormik({
+        validationSchema : SubCateSchema,
         initialValues : {
             name : "",
             categoryId : ""
@@ -43,12 +45,12 @@ const AddSubCategory = () => {
                     </div>
                     <div className="card-body">
                         <div className="my-2">
-                            <label>Name</label>                            
-                            <input name='name' onChange={SubCateFrm.handleChange} type='text' className='form-control' />
+                            <label>Name {SubCateFrm.errors.name && SubCateFrm.touched.name ? <small className='text-danger'>{SubCateFrm.errors.name}</small> : ''}</label>                            
+                            <input name='name' onChange={SubCateFrm.handleChange} type='text' className={'form-control '+(SubCateFrm.errors.name && SubCateFrm.touched.name ? 'is-invalid' : '')} />
                         </div>
                         <div className="my-3">
-                            <label>Category</label>
-                            <select name='categoryId' onChange={SubCateFrm.handleChange} className='form-control'>
+                            <label>Category {SubCateFrm.errors.categoryId && SubCateFrm.touched.categoryId ? <small className='text-danger'>{SubCateFrm.errors.categoryId}</small> : ''}</label>
+                            <select name='categoryId' onChange={SubCateFrm.handleChange} className={'form-control '+(SubCateFrm.errors.categoryId && SubCateFrm.touched.categoryId ? 'is-invalid' : '')}>
                                 <option>Select</option>
                                 {
                                     allCate.map(item=>{

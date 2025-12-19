@@ -33,7 +33,7 @@ const ListSubCategory = () => {
                                     <tr>
                                         <td>{index+1}</td>
                                         <td>{item.name}</td>
-                                        <td>{item.categoryId}</td>
+                                        <td>{item.categoryId.name}</td>
                                     </tr>
                                 )
                             })

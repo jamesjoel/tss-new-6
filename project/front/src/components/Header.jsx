@@ -98,8 +98,8 @@ const Header = () => {
                         <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span className="nav-label">{localStorage.getItem("name")} <span className="caret"></span></span></a>
                         <ul className="dropdown-menu">   
-                           <li><NavLink href=''>My Profile</NavLink></li>
-                           <li><NavLink href=''>My Orders</NavLink></li>
+                           <li><NavLink to='/myprofile'>My Profile</NavLink></li>
+                           <li><NavLink to='/myorders'>My Orders</NavLink></li>
                            <li><NavLink href=''>Wishlist</NavLink></li>
                            <li><NavLink to='/logout'>Logout</NavLink></li>
                            

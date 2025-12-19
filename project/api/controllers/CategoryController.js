@@ -1,8 +1,22 @@
 import Cate from '../models/Category.js';
+import jwt from 'jsonwebtoken'
+import { ENC_KEY } from '../config/config.js';
 
 let SaveCategory = async(req, res)=>{
-    let result = await Cate.create(req.body);
-    res.send({success: true, result});
+    if(req.headers.authorization){
+        let token = req.headers.authorization;
+        let obj = jwt.decode(token, ENC_KEY)
+        if(obj){
+            let result = await Cate.create(req.body);
+            res.send({success: true, result});
+        }else{
+
+            res.send({success:false})
+        }
+    }else{
+        res.send({success:false})
+    }
+    
 }
 let GetAllCategory = async(req, res)=>{
     let result = await Cate.find();

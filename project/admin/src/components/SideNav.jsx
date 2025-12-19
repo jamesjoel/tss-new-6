@@ -17,7 +17,7 @@ const SideNav = () => {
                 
               </div>
               <div className="nav-profile-text d-flex flex-column pr-3">
-                <span className="font-weight-medium mb-2">Admin</span>
+                <span className="font-weight-medium mb-2">{localStorage.getItem("admin_name")}</span>
                 
               </div>
               
@@ -105,10 +105,10 @@ const SideNav = () => {
           </li>
           
           <li className="nav-item">
-            <a className="nav-link" href="index.html">
+            <NavLink className="nav-link" to="/logout">
               <i className="mdi mdi-logout menu-icon"></i>
               <span className="menu-title">Logout</span>
-            </a>
+            </NavLink>
           </li>
           
           

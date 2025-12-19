@@ -21,14 +21,17 @@ const Login = () => {
             .then(response=>{
                 // console.log(response.data);return;
                 if(response.data.success==true){
+                    // {success:true, name : "", token : ""}
                     localStorage.setItem("name", response.data.name);
                     localStorage.setItem("access_user", response.data.token);
                     navigate("/");
                 }
                 else{
                     if(response.data.errType==1){
+                        // {success:false, errType=1}
                         setErrMsg("This Email Id and Password is Incorrect")
                     }if(response.data.errType==2){
+                        // {success:false, errType=2}
                         setErrMsg("This Password is Incorrect")
 
                     }

@@ -5,7 +5,7 @@ let SaveSubCategory = async(req, res)=>{
     res.send({success: true, result});
 }
 let GetAllSubCategory = async(req, res)=>{
-    let result = await SubCate.find();
+    let result = await SubCate.find().populate("categoryId").exec();
     res.send({success: true, result});
 }
 let GetAllSubCategoryById = async(req, res)=>{
