@@ -71,7 +71,7 @@ const Signup = () => {
                     <div className="card-body">
                         <div className='mt-4'>
                             <label>Full Name</label>
-                            <input name='name' onChange={SignupFrm.handleChange} type='text' className={'form-control ' + (SignupFrm.errors.name && SignupFrm.touched.name ? 'is-invalid' : '')} placeholder='Full Name' />
+                            <input name='name' onChange={SignupFrm.handleChange} type='text'className={ 'form-control ' + (SignupFrm.errors.name && SignupFrm.touched.name ? 'is-invalid' : '')} placeholder='Full Name' />
                             {
                                 SignupFrm.errors.name && SignupFrm.touched.name
                                 ?

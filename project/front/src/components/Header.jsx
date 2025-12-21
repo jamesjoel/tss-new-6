@@ -1,18 +1,18 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
-import axios from 'axios'
-import {API_URL} from '../config/API'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import {NavLink} from 'react-router-dom';
+import axios from 'axios';
+import {API_URL} from '../config/API';
+import { useState } from 'react';
+import { useEffect } from 'react';
 const Header = () => {
 
-   let [allCate, setAllCate] = useState([]);
+   let [allCate, setAllCate] = useState
 
    useEffect(()=>{
       axios
       .get(API_URL+"/category")
-      .then(response=>{
-         setAllCate(response.data.result);
+      .then(Response=>{
+         setAllCate(Response.data.result);
       })
    },[])
 
@@ -34,7 +34,7 @@ const Header = () => {
                            <NavLink className="nav-link" to="/about">About</NavLink>
                         </li>
                         <li className="nav-item">
-                           <NavLink className="nav-link" to="/Login">Login</NavLink>
+                           <NavLink className="nav-link" to="/Logout">Logout</NavLink>
                         </li>
                         <li className="nav-item">
                            <NavLink className="nav-link" to="/signup">Signup</NavLink>
