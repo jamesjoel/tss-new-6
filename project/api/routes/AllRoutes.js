@@ -6,6 +6,7 @@ import SubCategoryRoutes from './SubCategoryRoutes.js'
 import UserAuthRoutes from './UserAuthRoute.js'
 import ProfileRoutes from './ProfileRoutes.js'
 import AdminAuthRoutes from './AdminAuthRoutes.js'
+import ProductRoutes from './ProductRoutes.js'
 let routes = express.Router();
 
 routes.use("/api/v1/city", CityRoutes);
@@ -15,5 +16,6 @@ routes.use("/api/v1/subcategory", SubCategoryRoutes);
 routes.use("/api/v1/auth", UserAuthRoutes);
 routes.use("/api/v1/profile", ProfileRoutes);
 routes.use("/api/v1/adminauth", AdminAuthRoutes);
+routes.use("/api/v1/product", ProductRoutes);
 
 export default routes;

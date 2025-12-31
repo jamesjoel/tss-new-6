@@ -8,6 +8,8 @@ import ListSubCategory from '../pages/subcategory/ListSubCategory'
 import Login from '../pages/Login'
 import ProtactedRoutes from './ProtactedRoutes'
 import Logout from '../pages/Logout'
+import AddProducts from '../pages/products/AddProducts'
+import ListProducts from '../pages/products/ListProducts'
 const AllRoutes = () => {
   return (
     <Routes>
@@ -16,6 +18,8 @@ const AllRoutes = () => {
 
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/logout' element={<Logout />} />
+          <Route path='/product' element={<AddProducts />} />
+          <Route path='/product/list' element={<ListProducts />} />
           <Route path='/category' element={<AddCategory />} />
           <Route path='/category/list' element={<ListCategory />} />
           <Route path='/subcategory' element={<AddSubCategory />} />

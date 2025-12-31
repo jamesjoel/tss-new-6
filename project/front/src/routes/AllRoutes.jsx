@@ -9,6 +9,7 @@ import Logout from '../pages/users/Logout'
 import MyProfile from '../pages/users/MyProfile'
 import ProtactedRoutes from './ProtactedRoutes'
 import MyOrders from '../pages/users/MyOrders'
+import Detail from '../pages/Detail'
 
 const AllRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const AllRoutes = () => {
 
      
 
+          <Route path="/detail/:a" element={<Detail />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
      

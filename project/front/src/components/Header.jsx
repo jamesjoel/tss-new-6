@@ -12,7 +12,7 @@ const Header = () => {
 
    useEffect(() => {
       axios
-         .get(API_URL + "/category")
+         .get(API_URL + "/category/subcate")
          .then(response => {
             setAllCate(response.data.result);
          })
@@ -41,41 +41,27 @@ const Header = () => {
                            Categories
                         </a>
                         <ul className="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-                           <li className="dropdown-item"><a href="#">item 1</a></li>
-                           
-                           <li className="dropdown-submenu">
-                              <a className="dropdown-item" href="#">item 2</a>
-                              <ul className="dropdown-menu">
-                                 <li className="dropdown-item"><a href="#">#####</a></li>
-                                 <li className="dropdown-item"><a href="#">#####</a></li>
-                                 <li className="dropdown-item"><a href="#">#####</a></li>
-                              </ul>
-                           </li>
-                           
-                           <li className="dropdown-submenu">
-                              <a className="dropdown-item"  href="#">item 3</a>
-                              <ul className="dropdown-menu">
-                                 <li className="dropdown-item"><a href="#">-----</a></li>
-                                 <li className="dropdown-item"><a href="#">-----</a></li>
-                                 <li className="dropdown-item"><a href="#">-----</a></li>
-                              </ul>
-                           </li>
-                        </ul>
-                     </li>
-                     <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span className="nav-label">Categories <span className="caret"></span></span></a>
-                        <ul className="dropdown-menu">
                            {
-                              allCate.map(item => {
-                                 return (
-
-                                    <li><a href="about.html">{item.name}</a></li>
+                              allCate.map(item1=>{
+                                 return(
+                                    <li className="dropdown-submenu">
+                              <a className="dropdown-item" href="#">{item1.category ? item1.category.name : ''}</a>
+                              <ul className="dropdown-menu">
+                                 {
+                                    item1.info.map(item2=>{
+                                       return(
+                                          <li className="dropdown-item"><a href="#">{item2.name}</a></li>
+                                       )
+                                    })
+                                 }                                 
+                              </ul>
+                           </li>
                                  )
                               })
                            }
-
                         </ul>
                      </li>
+                     
                      {/* <li className="nav-item dropdown">
                            <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span className="nav-label">Pages <span className="caret"></span></span></a>
                            <ul className="dropdown-menu">

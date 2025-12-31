@@ -1,5 +1,12 @@
 import SubCate from '../models/SubCategory.js';
 
+let GetAllSubCateByCateId = async(req, res)=>{
+    // console.log(req.params);
+    let cid = req.params.id;
+    let result = await SubCate.find({categoryId : cid});
+    res.send({success: true, result});
+}
+
 let SaveSubCategory = async(req, res)=>{
     let result = await SubCate.create(req.body);
     res.send({success: true, result});
@@ -24,4 +31,4 @@ let DeleteSubCategory = async(req, res)=>{
     res.send({success: true, result});
 }
 
-export {SaveSubCategory, UpdateSubCategory, DeleteSubCategory, GetAllSubCategory, GetAllSubCategoryById};
+export {SaveSubCategory, GetAllSubCateByCateId, UpdateSubCategory, DeleteSubCategory, GetAllSubCategory, GetAllSubCategoryById};

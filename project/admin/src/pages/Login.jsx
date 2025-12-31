@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useFormik} from 'formik'
 import {useNavigate} from 'react-router-dom'
 import * as YUP from 'yup';
@@ -11,7 +11,18 @@ let LoginSchema = YUP.object({
 })
 
 const Login = () => {
+
+
+
     let navigate = useNavigate();
+    useEffect(()=>{
+        if(localStorage.getItem("sseccanimda")){
+            navigate("/dashboard");
+        }
+    },[])
+
+
+
     let [errMsg, setErrMsg] = useState("");
     let LoginFrm = useFormik({
         initialValues : {

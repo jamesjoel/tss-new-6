@@ -75,10 +75,10 @@ const SideNav = () => {
             <div className="collapse" id="pro">
               <ul className="nav flex-column sub-menu">
                 <li className="nav-item">
-                  <a className="nav-link" href="pages/ui-features/buttons.html">Add</a>
+                  <NavLink className="nav-link" to="/product">Add</NavLink>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="pages/ui-features/dropdowns.html">List</a>
+                  <NavLink className="nav-link" to="/product/list">List</NavLink>
                 </li>
                 
               </ul>

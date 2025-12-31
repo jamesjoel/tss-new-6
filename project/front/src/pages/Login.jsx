@@ -5,9 +5,23 @@ import LoginSchema from '../schema/LoginSchema'
 import {API_URL} from '../config/API'
 import axios from 'axios'
 
+import { ToastContainer, toast } from 'react-toastify'
+import { useEffect } from 'react'
+
 const Login = () => {
     let navigate = useNavigate();
+    useEffect(()=>{
+        if(localStorage.getItem("access_user")){
+            navigate("/myprofile")
+        }
+    },[])
+
+
     let [errMsg, setErrMsg] = useState("");
+
+    
+
+
     let LoginFrm = useFormik({
         validationSchema : LoginSchema,
         initialValues : {
@@ -24,7 +38,10 @@ const Login = () => {
                     // {success:true, name : "", token : ""}
                     localStorage.setItem("name", response.data.name);
                     localStorage.setItem("access_user", response.data.token);
-                    navigate("/");
+                    toast("You are successful Logged In ....", {
+                        onClose : ()=>navigate("/")
+                    })
+                    // navigate("/");
                 }
                 else{
                     if(response.data.errType==1){
@@ -43,7 +60,12 @@ const Login = () => {
   
   return (
     <div className="container my-5">
-        
+
+
+        <ToastContainer type="success" theme='dark'/>
+
+
+
             <form onSubmit={LoginFrm.handleSubmit}>
         <div className="row">
             <div className="col-md-6 mt-3 offset-md-3">

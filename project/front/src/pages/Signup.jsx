@@ -6,6 +6,12 @@ import { API_URL } from '../config/API'
 import SignupSchema from '../schema/SignupSchema'
 const Signup = () => {
     let navigate = useNavigate();
+    useEffect(()=>{
+            if(localStorage.getItem("access_user")){
+                navigate("/myprofile")
+            }
+        },[])
+
     let [pwdType, setPwdType] = useState("password");
     let [pwdClass, setPwdClass] = useState("fa-eye-slash")
     let [allCity, setAllCity] = useState([]);

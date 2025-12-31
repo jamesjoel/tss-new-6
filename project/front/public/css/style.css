@@ -1067,7 +1067,18 @@ div.form_sub .field input[type="email"], div.form_sub .field input[type="email"]
     font-weight: 600;
     padding: 0 15px;
 }
-
+.btn-orange{
+  display: inline-block;
+    padding: 12px 45px;
+    background-color: #f7444e;
+    border: 1px solid #f7444e;
+    color: #ffffff;
+    border-radius: 0;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    margin-top: 10px;
+    font-weight: 700;
+}
 form input {
     background: #fff;
     border: solid #ccc 1px;
