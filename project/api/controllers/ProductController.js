@@ -1,6 +1,7 @@
 import Pro from '../models/Product.js';
 import jwt from 'jsonwebtoken'
 import { ENC_KEY } from '../config/config.js';
+import PATH from 'path'
 
 let SaveProduct = async(req, res)=>{
     if(req.headers.authorization){
@@ -42,4 +43,47 @@ let DeleteProduct = async(req, res)=>{
     res.send({success: true, result});
 }
 
-export {SaveProduct, UpdateProduct, DeleteProduct, GetAllProduct, GetAllProductById};
+let DeleteAllProduct = async(req, res)=>{
+    await Pro.deleteMany();
+    res.send({success:true});
+}
+
+let UploadImage = async(req, res)=>{
+    // console.log(req.files);
+    let pid = req.params.id;
+    let image = req.files.photo;
+    await Pro.updateMany({ _id : pid }, {image : image.name});
+    image.mv(PATH.resolve()+"/assets/product_images/"+image.name,  (err)=>{
+        if(err){
+            console.log(err);
+        }else{
+
+            res.send({success:true});
+        }
+    });
+
+}
+
+export {SaveProduct, UpdateProduct, UploadImage, DeleteAllProduct, DeleteProduct, GetAllProduct, GetAllProductById};
+
+
+/*
+npm init --y
+express
+mongoose
+cors  --------- app.js ---- cors import ----- app.use(cors())
+sha1
+jsonwebtoken
+express-fileupload  -------- app.js ----- express-fileupload import ---- app.use(upload())
+
+
+
+
+
+
+req.body
+req.params 
+req.headers 
+req.files
+
+*/

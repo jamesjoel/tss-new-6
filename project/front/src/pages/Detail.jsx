@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useParams } from 'react-router-dom'
 import axios from 'axios';
-import { API_URL } from '../config/API';
+import { API_PATH, API_URL } from '../config/API';
 const Detail = () => {
     let [pro, setPro] = useState({});
     let param = useParams();
@@ -19,7 +19,7 @@ const Detail = () => {
         <div className="row">
             <div className="col-md-5">
                 <div className="px-4">
-                    <img src='/images/p2.png' className='img-thumbnail' style={{height : 400, width : "100%"}}/>
+                    <img src={pro.image ? `${API_PATH}/product_images/${pro.image}` : `/images/pro_avatar.jpg`} className='img-thumbnail' style={{height : 400, width : "100%"}}/>
                 <div className='d-flex justify-content-around mt-3'>
                     <NavLink to='' className='btn-orange '><i class="fa fa-bolt" aria-hidden="true"></i> Buy Now</NavLink>
                     <NavLink to='' className='btn-orange '> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add To Cart</NavLink>

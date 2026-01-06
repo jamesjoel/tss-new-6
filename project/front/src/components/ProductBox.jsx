@@ -1,6 +1,6 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-
+import { API_PATH } from '../config/API'
 const ProductBox = ({item}) => {
   return (
     <div className="col-sm-6 col-md-4 col-lg-4" >
@@ -17,7 +17,7 @@ const ProductBox = ({item}) => {
                               </div>
                               <div className="img-box">
                                  
-                                 <img src='/images/p2.png' style={{height : "100px"}} alt="" />
+                                 <img src={item.image ? `${API_PATH}/product_images/${item.image}` : `/images/pro_avatar.jpg`} style={{height : "100px"}} alt="" />
                               </div>
                               <div className="detail-box">
                                  <p>

@@ -11,7 +11,8 @@ let ProSchema = mongoose.Schema({
     discount : Number,
     color : String,
     size : String,
-    detail : String
+    image : String,
+    detail : String,
 }, {timestamps : true})
 
 let Pro = mongoose.model("product", ProSchema);
