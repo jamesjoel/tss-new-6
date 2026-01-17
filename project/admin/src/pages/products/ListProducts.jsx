@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { API_URL } from '../../config/API'
 import { useRef } from 'react'
+import Modal from 'react-bootstrap/Modal'
+import {ToastContainer, toast} from 'react-toastify'
+
 const ListProducts = () => {
 
   let file = useRef();
@@ -11,6 +14,9 @@ const ListProducts = () => {
   let [imageSrc, setImageSrc] = useState("");
 
   let [proId, setProId] = useState(null);
+  let [pro, setPro] = useState({})
+  let [show, setShow] = useState(false)
+  let [preloader, setPreLoader] = useState(false);
 
 
 
@@ -51,10 +57,48 @@ const ListProducts = () => {
 
   }
 
+  let askDelete = (obj)=>{
+    // console.log(obj)
+    setPro(obj);
+    setShow(true)
+  }
+
+  let confDelete = ()=>{
+    setPreLoader(true);
+    axios
+    .delete(`${API_URL}/product/${pro._id}`)
+    .then(response=>{
+      setPreLoader(false);
+      setAllPro(curr=>curr.filter(item=>item._id != pro._id));
+      setShow(false);
+      toast("Product Deleted Successfuly.....")
+    })
+  }
+
+
   return (
+    <>
+    <ToastContainer />
+    <Modal show={show}>
+      <Modal.Header>
+        <Modal.Title>Delete Product</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p>Are you sure want to Delete <b>{pro.title}</b> !</p>
+      </Modal.Body>
+      <Modal.Footer>
+        <button onClick={confDelete} className='btn btn-danger'>Confirm {preloader ? <span className='spinner-border spinner-border-sm'></span> : ''}</button>
+        <button onClick={()=>setShow(false)} className='btn btn-info'>Close</button>
+      </Modal.Footer>
+    </Modal>
     <div className="main-panel">
           <div className="content-wrapper pb-0">
+            <h2>Product</h2>
             <div className="page-header flex-wrap">
+              {
+                allPro.length > 0 
+                ?
+                <>
               <h3>List of All Product</h3>
               <input onChange={selectImage} accept=".jpg, .jpeg, .png, image/jpeg, image/png" ref={file} style={{display : "none"}} type='file' />
                 <div className="table-responsive">
@@ -67,6 +111,7 @@ const ListProducts = () => {
                         <th>Category</th>
                         <th>Sub-Category</th>
                         <th>Image</th>
+                        <th>Delete</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -82,13 +127,22 @@ const ListProducts = () => {
                               <td>
                                 <i onClick={()=>selectUploadImage(item._id)} className='fa fa-upload text-success'></i>
                               </td>
+                              <td>
+                                <button onClick={()=>askDelete(item)} className='btn btn-danger btn-sm'>
+                                  <i className='fa fa-trash'></i>
+                                </button>
+                              </td>
                             </tr>
                           )
                         })
                       }
                     </tbody>
                   </table>
-                  </div>
+                </div>
+              </>
+              :
+              <div className='alert alert-warning'>No Data Found</div>
+              }
             </div>
           </div>
 
@@ -103,6 +157,7 @@ const ListProducts = () => {
             <button onClick={upload} className='btn btn-info mt-2'>Upload</button>
           </div>
     </div>
+    </>
   )
 }
 

@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink, useParams } from 'react-router-dom'
+import { NavLink, useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { API_PATH, API_URL } from '../config/API';
+import Modal from 'react-bootstrap/Modal'
 const Detail = () => {
+    let navigate = useNavigate();
+    let [show, setShow] = useState(false)
     let [pro, setPro] = useState({});
     let param = useParams();
     useEffect(()=>{
@@ -14,14 +17,39 @@ const Detail = () => {
         })
     },[])
 
+
+    let checkUserLoggedIn = ()=>{
+        if(localStorage.getItem("access_user")){
+            navigate("/buy-now/"+param.a)
+        }else{
+            setShow(true)
+        }
+    }
+    let handleClose = ()=>setShow(false);
+
+    let goToLoginPage = ()=>{
+        setShow(false);
+        navigate("/login");
+    }
   return (
+    <>
+    <Modal show={show} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title>Message</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>If you buy product then you have to login first</Modal.Body>
+        <Modal.Footer>
+          <button onClick={goToLoginPage} className='btn btn-info'>Login</button>
+          <button onClick={()=>setShow(false)} className='btn btn-danger'>Close</button>
+        </Modal.Footer>
+      </Modal>
     <div className="container my-5">
         <div className="row">
             <div className="col-md-5">
                 <div className="px-4">
                     <img src={pro.image ? `${API_PATH}/product_images/${pro.image}` : `/images/pro_avatar.jpg`} className='img-thumbnail' style={{height : 400, width : "100%"}}/>
                 <div className='d-flex justify-content-around mt-3'>
-                    <NavLink to='' className='btn-orange '><i class="fa fa-bolt" aria-hidden="true"></i> Buy Now</NavLink>
+                    <button onClick={checkUserLoggedIn} className='btn-orange '><i class="fa fa-bolt" aria-hidden="true"></i> Buy Now</button>
                     <NavLink to='' className='btn-orange '> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add To Cart</NavLink>
                 </div>
                 </div>
@@ -40,6 +68,7 @@ const Detail = () => {
             </div>
         </div>
     </div>
+    </>
   )
 }
 

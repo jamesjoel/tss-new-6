@@ -1,5 +1,6 @@
 import Cate from '../models/Category.js';
 import SubCate from '../models/SubCategory.js'
+import Product from '../models/Product.js'
 import jwt from 'jsonwebtoken'
 import { ENC_KEY } from '../config/config.js';
 
@@ -51,6 +52,8 @@ let UpdateCategory = async(req, res)=>{
 }
 let DeleteCategory = async(req, res)=>{
     let id = req.params.id;
+    await Product.deleteMany({categoryId : id});
+    await SubCate.deleteMany({categoryId : id});
     let result = await Cate.deleteMany({_id : id});
     res.send({success: true, result});
 }

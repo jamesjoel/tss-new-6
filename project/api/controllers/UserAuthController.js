@@ -9,9 +9,14 @@ let Auth = async(req, res)=>{
     if(result.length > 0){
             // that means "email" is correct
             if(result[0].password == sha1(password)){ // passwrod is correct
-                let userobj = { id : result[0]._id }
-                let token = jwt.sign(userobj, "hello");
-                res.send({success:true, name : result[0].name, token : token});
+                if(result[0].status==1){
+
+                    let userobj = { id : result[0]._id }
+                    let token = jwt.sign(userobj, "hello");
+                    res.send({success:true, name : result[0].name, token : token});
+                }else{
+                    res.send({success:false, errType : 3});
+                }
             }else{
                 res.send({success:false, errType : 2});
             }

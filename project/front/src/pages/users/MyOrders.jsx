@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const MyOrders = () => {
-  return (
+
+ return (
     
             <div className="col-md-9">
               <div className="alert" style={{backgroundColor : "#a5d4e7ff"}}>
@@ -15,3 +16,10 @@ const MyOrders = () => {
 }
 
 export default MyOrders
+
+/*
+
+
+
+
+*/

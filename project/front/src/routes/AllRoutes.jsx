@@ -10,26 +10,34 @@ import MyProfile from '../pages/users/MyProfile'
 import ProtactedRoutes from './ProtactedRoutes'
 import MyOrders from '../pages/users/MyOrders'
 import Detail from '../pages/Detail'
+import ShowFooterRoutes from './ShowFooterRoutes'
+import BuyNow from '../pages/users/BuyNow'
+import ProtactedRoutesWithoutSideNav from './ProtactedRoutesWithoutSideNav'
 
 const AllRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+        <Route path='' element={<ShowFooterRoutes />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+        </Route>
 
      
 
           <Route path="/detail/:a" element={<Detail />} />
           <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-     
 
 
-      <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path='' element={<ProtactedRoutes />}>
-          <Route path='/myorders' element={<MyOrders />} />
-          <Route path="/myprofile" element={<MyProfile />} />
-          <Route path="/logout" element={<Logout />} />
+      <Route path='' element={<ProtactedRoutesWithoutSideNav />}>
+          
+          <Route path='/buy-now/:id' element={<BuyNow />} />
+          <Route path='' element={<ProtactedRoutes />}>
+            <Route path='/myorders' element={<MyOrders />} />
+            <Route path="/myprofile" element={<MyProfile />} />
+            <Route path="/logout" element={<Logout />} />
+          </Route>
       </Route>
 
 

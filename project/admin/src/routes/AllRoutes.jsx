@@ -10,20 +10,23 @@ import ProtactedRoutes from './ProtactedRoutes'
 import Logout from '../pages/Logout'
 import AddProducts from '../pages/products/AddProducts'
 import ListProducts from '../pages/products/ListProducts'
+import ListUsers from '../pages/users/ListUsers'
 const AllRoutes = () => {
   return (
     <Routes>
         <Route path='/' element={<Login />} />
-        <Route path='' element={<ProtactedRoutes />}>
 
-          <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/logout' element={<Logout />} />
-          <Route path='/product' element={<AddProducts />} />
-          <Route path='/product/list' element={<ListProducts />} />
-          <Route path='/category' element={<AddCategory />} />
-          <Route path='/category/list' element={<ListCategory />} />
-          <Route path='/subcategory' element={<AddSubCategory />} />
-          <Route path='/subcategory/list' element={<ListSubCategory />} />
+
+        <Route path='' element={<ProtactedRoutes />}>
+              <Route path='/dashboard' element={<Dashboard />} />
+              <Route path='/logout' element={<Logout />} />
+              <Route path='/users/list' element={<ListUsers />} />
+              <Route path='/product' element={<AddProducts />} />
+              <Route path='/product/list' element={<ListProducts />} />
+              <Route path='/category' element={<AddCategory />} />
+              <Route path='/category/list' element={<ListCategory />} />
+              <Route path='/subcategory' element={<AddSubCategory />} />
+              <Route path='/subcategory/list' element={<ListSubCategory />} />
         </Route>
 
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {useFormik} from 'formik'
-import {useNavigate} from 'react-router-dom'
+import {Navigate, useNavigate} from 'react-router-dom'
 import * as YUP from 'yup';
 import axios from 'axios'
 import { API_URL } from '../config/API';
@@ -11,15 +11,18 @@ let LoginSchema = YUP.object({
 })
 
 const Login = () => {
-
+    let token = localStorage.getItem("sseccanimda");
+    if(token){
+        return <Navigate to="/dashboard" replace/>
+    }
 
 
     let navigate = useNavigate();
-    useEffect(()=>{
-        if(localStorage.getItem("sseccanimda")){
-            navigate("/dashboard");
-        }
-    },[])
+    // useEffect(()=>{
+    //     if(localStorage.getItem("sseccanimda")){
+    //         navigate("/dashboard");
+    //     }
+    // },[])
 
 
 

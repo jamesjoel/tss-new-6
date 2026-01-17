@@ -10,7 +10,7 @@ const MyProfile = () => {
     axios
     .get(`${API_URL}/profile`, { headers : {Authorization : localStorage.getItem("access_user")}})
     .then(response=>{
-      console.log(response.data.result);
+      // console.log(response.data.result);
       setUser(response.data.result);
     })
   },[])

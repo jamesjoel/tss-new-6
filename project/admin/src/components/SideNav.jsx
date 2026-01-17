@@ -94,7 +94,8 @@ const SideNav = () => {
             <div className="collapse" id="user">
               <ul className="nav flex-column sub-menu">
                 <li className="nav-item">
-                  <a className="nav-link" href="pages/ui-features/buttons.html">Add</a>
+                  <NavLink className="nav-link" to="/users/list">List</NavLink>
+
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="pages/ui-features/dropdowns.html">List</a>
