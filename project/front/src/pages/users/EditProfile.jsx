@@ -1,12 +1,13 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {useFormik} from 'formik'
 import { API_URL } from '../../config/API';
 import UpdateProfileSchema from '../../schema/UpdateProfileSchema';
 const EditProfile = () => {
+    let navigate = useNavigate();
     let [user, setUser] = useState({});
     let [allCity, setAllCity] = useState([])
     useEffect(()=>{
@@ -30,7 +31,15 @@ const EditProfile = () => {
         initialValues : user,
         enableReinitialize : true,
         onSubmit : (formData)=>{
-            console.log(formData)
+            // console.log(formData)
+            axios
+            .put(`${API_URL}/profile`, formData, { headers : {Authorization : localStorage.getItem("access_user")}})
+            .then(response=>{
+                // console.log(response.data)
+                localStorage.setItem("name", formData.name);
+                navigate("/myprofile")
+            })
+
         }
     })
 
@@ -113,7 +122,7 @@ const EditProfile = () => {
                             }
                         </div>
                         <br />
-                        <button className='btn btn-success'>Update</button>
+                        <button type='submit' className='btn btn-success'>Update</button>
                     </div>
                 </div>
                     </form>
@@ -123,3 +132,12 @@ const EditProfile = () => {
 }
 
 export default EditProfile
+
+/*
+
+axios.get("url", {header....}).then
+axios.post("url", formData, {header....}).then
+axios.put("url", formData, {header....}).then
+axios.delete("url", {header....})
+
+*/

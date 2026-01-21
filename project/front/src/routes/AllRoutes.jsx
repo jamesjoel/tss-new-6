@@ -14,6 +14,7 @@ import ShowFooterRoutes from './ShowFooterRoutes'
 import BuyNow from '../pages/users/BuyNow'
 import ProtactedRoutesWithoutSideNav from './ProtactedRoutesWithoutSideNav'
 import EditProfile from '../pages/users/EditProfile'
+import ChangePassword from '../pages/users/ChangePassword'
 
 const AllRoutes = () => {
   return (
@@ -39,6 +40,7 @@ const AllRoutes = () => {
             <Route path='/myorders' element={<MyOrders />} />
             <Route path="/myprofile" element={<MyProfile />} />
             <Route path="/myprofile/edit" element={<EditProfile />} />
+            <Route path="/myprofile/change-password" element={<ChangePassword />} />
 
             <Route path="/logout" element={<Logout />} />
           </Route>
