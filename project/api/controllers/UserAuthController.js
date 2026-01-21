@@ -1,5 +1,6 @@
 import User from '../models/User.js'
 import sha1 from 'sha1'
+import { ENC_KEY } from '../config/config.js'
 import jwt from 'jsonwebtoken'
 let Auth = async(req, res)=>{
     // console.log(req.body);
@@ -12,7 +13,7 @@ let Auth = async(req, res)=>{
                 if(result[0].status==1){
 
                     let userobj = { id : result[0]._id }
-                    let token = jwt.sign(userobj, "hello");
+                    let token = jwt.sign(userobj, ENC_KEY);
                     res.send({success:true, name : result[0].name, token : token});
                 }else{
                     res.send({success:false, errType : 3});

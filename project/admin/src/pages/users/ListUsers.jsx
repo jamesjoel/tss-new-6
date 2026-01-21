@@ -6,7 +6,7 @@ const ListUsers = () => {
     let [allUser, setAllUser] = useState([]);
     useEffect(()=>{
         axios
-        .get(`${API_URL}/user`)
+        .get(`${API_URL}/user`, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
         .then(response=>{
             setAllUser(response.data.result);
         })

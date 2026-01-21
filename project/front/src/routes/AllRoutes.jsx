@@ -13,6 +13,7 @@ import Detail from '../pages/Detail'
 import ShowFooterRoutes from './ShowFooterRoutes'
 import BuyNow from '../pages/users/BuyNow'
 import ProtactedRoutesWithoutSideNav from './ProtactedRoutesWithoutSideNav'
+import EditProfile from '../pages/users/EditProfile'
 
 const AllRoutes = () => {
   return (
@@ -34,8 +35,11 @@ const AllRoutes = () => {
           
           <Route path='/buy-now/:id' element={<BuyNow />} />
           <Route path='' element={<ProtactedRoutes />}>
+
             <Route path='/myorders' element={<MyOrders />} />
             <Route path="/myprofile" element={<MyProfile />} />
+            <Route path="/myprofile/edit" element={<EditProfile />} />
+
             <Route path="/logout" element={<Logout />} />
           </Route>
       </Route>

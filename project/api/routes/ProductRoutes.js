@@ -1,14 +1,16 @@
 import express from 'express';
 import {SaveProduct, DeleteAllProduct, UploadImage, UpdateProduct, DeleteProduct, GetAllProduct, GetAllProductById} from '../controllers/ProductController.js'
+import IsAdminLoggedIn from '../util/IsAdminLoggedIn.js'
 let routes = express.Router();
 
 routes.get("/", GetAllProduct);
 routes.get("/deleteall", DeleteAllProduct);
 routes.get("/:id", GetAllProductById);
-routes.post("/", SaveProduct);
-routes.put("/uploadimage/:id", UploadImage)
-routes.put("/:id", UpdateProduct);
-routes.delete("/:id", DeleteProduct);
+
+routes.post("/",IsAdminLoggedIn, SaveProduct);
+routes.put("/uploadimage/:id", IsAdminLoggedIn, UploadImage)
+routes.put("/:id", IsAdminLoggedIn, UpdateProduct);
+routes.delete("/:id", IsAdminLoggedIn, DeleteProduct);
 
 
 export default routes;

@@ -4,6 +4,7 @@ import AllRoutes from './routes/AllRoutes.js'
 import cors from 'cors'
 import upload from 'express-fileupload';
 import PATH from 'path';
+import IsUserLoggedIn from './util/IsUserLoggedIn.js';
 
 // PATH.resolve()
 

@@ -16,7 +16,7 @@ const ProtactedRoutes = () => {
     
   useEffect(()=>{
     axios
-    .get(`${API_URL}/profile`, { headers : {Authorization : localStorage.getItem("access_user")}})
+    .get(`${API_URL}/profile/profilepic`, { headers : {Authorization : localStorage.getItem("access_user")}})
     .then(response=>{
       // console.log(response.data.result);
       setUser(response.data.result);

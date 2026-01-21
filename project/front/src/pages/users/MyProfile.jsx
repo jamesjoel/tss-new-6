@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import axios from 'axios'
 import {API_URL} from '../../config/API'
 import { useState } from 'react'
+import {NavLink} from 'react-router-dom'
 import './MyProfile.css'
 // http://localhost:3000/api/v1/profile
 const MyProfile = () => {
@@ -20,7 +21,7 @@ const MyProfile = () => {
         <div className="col-md-9">
           <div className="alert" style={{backgroundColor : "#a5d4e7ff"}}>
             <h4>Profile Information</h4>
-            <a href=''>Edit</a>
+            <NavLink to='/myprofile/edit'>Edit</NavLink>
             <br />
             <br />
             <div className="row">

@@ -7,6 +7,9 @@ import UserAuthRoutes from './UserAuthRoute.js'
 import ProfileRoutes from './ProfileRoutes.js'
 import AdminAuthRoutes from './AdminAuthRoutes.js'
 import ProductRoutes from './ProductRoutes.js'
+import IsUserLoggedIn from '../util/IsUserLoggedIn.js'
+
+
 let routes = express.Router();
 
 routes.use("/api/v1/city", CityRoutes);
@@ -14,7 +17,7 @@ routes.use("/api/v1/user", UserRoutes);
 routes.use("/api/v1/category", CategoryRoutes);
 routes.use("/api/v1/subcategory", SubCategoryRoutes);
 routes.use("/api/v1/auth", UserAuthRoutes);
-routes.use("/api/v1/profile", ProfileRoutes);
+routes.use("/api/v1/profile", IsUserLoggedIn ,ProfileRoutes);
 routes.use("/api/v1/adminauth", AdminAuthRoutes);
 routes.use("/api/v1/product", ProductRoutes);
 
