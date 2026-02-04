@@ -1,44 +1,26 @@
 import React, { useState, useRef } from 'react'
 import axios from 'axios'
-/*
-HTTP Request Object -- Methods
-  .get
-  .post
-  .put
-  .delete
-
-
-axios.get("url").then(response=>{
-  
-  
-})
-
-
-*/
-
-
-
+import {API_URL} from '../config/API'
 const About = () => {
 
-  let [src, setSrc] = useState('/images/p1.png')
-  let selectFile = useRef();
-  let demo = ()=>{
-    selectFile.current.click();
+  let [msg, setMsg] = useState("")
+  let send = ()=>{
+    axios
+    .get(`${API_URL}/city/sendmail`)
+    .then(response=>{
+      console.log(response.data)
+      setMsg("Email Send Successfuly....")
+    })
   }
 
-  let hello = ()=>{
-    // console.log(selectFile.current.files[0])
-    let x = URL.createObjectURL(selectFile.current.files[0]);
-    // console.log(x)
-    setSrc(x)
-  }
   return (
     <div className="container my-4">
       <div className="row">
         <div className="col-md-12">
-          <img style={{height : 300, width : 300}} src={src} />
-          <button onClick={demo}>ok</button>
-          <input onChange={hello} ref={selectFile} type='file' style={{display : "none"}}/>
+          <br />
+          <br />
+          <button onClick={send} className='btn btn-primary'>Send</button>
+          <p>{msg}</p>
         </div>
       </div>
     </div>

@@ -104,6 +104,23 @@ const SideNav = () => {
               </ul>
             </div>
           </li>
+           <li className="nav-item">
+            <a className="nav-link" data-toggle="collapse" href="#setting" aria-expanded="false" aria-controls="ui-basic">
+              <i className="mdi mdi-tune menu-icon"></i>
+              <span className="menu-title">Settings</span>
+              <i className="menu-arrow"></i>
+            </a>
+            <div className="collapse" id="setting">
+              <ul className="nav flex-column sub-menu">
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/admins/list">Add New Admin</NavLink>
+
+                </li>
+                
+                
+              </ul>
+            </div>
+          </li>
           
           <li className="nav-item">
             <NavLink className="nav-link" to="/logout">

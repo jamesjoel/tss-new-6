@@ -1,26 +1,48 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { API_URL } from '../../config/API'
 import axios from 'axios'
 import {useFormik} from 'formik'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 import CateSchema from '../../schema/CategorySchema'
 
 
 const AddCategory = () => {
+  let param = useParams();
+  let [cate, setCate] = useState({
+      name : ""
+    })
+  
+  useEffect(()=>{
+    if(param.id){
+      axios
+      .get(`${API_URL}/category/${param.id}`)
+      .then(response=>{
+        // console.log(response.data)
+        setCate(response.data.result)
+      })
+    }
+  },[])
+
   let navigate = useNavigate();
   let CateFrm = useFormik({
     validationSchema : CateSchema,
-    initialValues : {
-      name : ""
-    },
+    enableReinitialize : true,
+    initialValues : cate,
     onSubmit : (formData)=>{
-      axios
-      // .post(API_URL+"/category", formData)
-      .post(`${API_URL}/category`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
-      .then(response=>{
-        // console.log(response.data)
-        navigate("/category/list")  
-      })
+      if(param.id){
+           axios
+        .put(`${API_URL}/category/${param.id}`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+        .then(response=>{
+          navigate("/category/list")  
+        })
+      }else{
+
+        axios
+        .post(`${API_URL}/category`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+        .then(response=>{
+          navigate("/category/list")  
+        })
+      }
     }
   })
 
@@ -33,12 +55,12 @@ const AddCategory = () => {
               <div className="col-md-6 col-lg-6 col-sm-6 stretch-card grid-margin">
                 <div className="card">
                     <div className="card-header">
-                        <h4>Add New Category</h4>
+                        <h4>{param.id ? 'Update' : 'Add New'} Category</h4>
                     </div>
                     <div className="card-body">
                       <div className="my-2">
                         <label htmlFor="">Category Name</label>
-                        <input name='name' onChange={CateFrm.handleChange} type='text' className={'form-control ' + (CateFrm.errors.name && CateFrm.touched.name ? 'is-invalid' : '') } />
+                        <input value={CateFrm.values.name} name='name' onChange={CateFrm.handleChange} type='text' className={'form-control ' + (CateFrm.errors.name && CateFrm.touched.name ? 'is-invalid' : '') } />
                         {
                           CateFrm.errors.name && CateFrm.touched.name
                           ?
@@ -50,7 +72,7 @@ const AddCategory = () => {
                       
                     </div>
                     <div className="card-footer">
-                      <button type='submit' className='btn btn-success'>Add</button>
+                      <button type='submit' className='btn btn-success'>{param.id ? 'Update' : 'Add'}</button>
                     </div>
                 </div>
               </div>

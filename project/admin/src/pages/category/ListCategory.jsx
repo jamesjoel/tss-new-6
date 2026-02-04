@@ -3,8 +3,10 @@ import { API_URL } from '../../config/API'
 import axios from 'axios'
 import Modal from 'react-bootstrap/Modal'
 import {ToastContainer, toast} from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 const ListCategory = () => {
+  let navigate = useNavigate();
   let [allCate, setAllCate] = useState([]);
   let [show, setShow] = useState(false);
 
@@ -30,7 +32,7 @@ const ListCategory = () => {
   let confDelete = ()=>{
     setPreLoader(true)
     axios
-    .delete(`${API_URL}/category/${cate._id}`)
+    .delete(`${API_URL}/category/${cate._id}`, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
     .then(response=>{
       setPreLoader(false)
       setShow(false);
@@ -39,6 +41,13 @@ const ListCategory = () => {
       
     })
   }
+
+  let goToEdit = (obj)=>{
+    // console.log(obj)
+    navigate("/category/edit/"+obj._id)
+  }
+
+
   return (
     <>
     <ToastContainer />
@@ -77,6 +86,7 @@ const ListCategory = () => {
                       <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>Edit</th>
                         <th>Delete</th>
                       </tr>
                     </thead>
@@ -87,6 +97,11 @@ const ListCategory = () => {
                             <tr>
                               <td>{index+1}</td>
                               <td>{item.name}</td>
+                              <td>
+                                <button onClick={()=>goToEdit(item)} className='btn btn-info btn-sm'>
+                                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
+                              </td>
                               <td>
                                 <button onClick={()=>askDelete(item)} className='btn btn-danger btn-sm'>
                                   <i className='fa fa-trash'></i>

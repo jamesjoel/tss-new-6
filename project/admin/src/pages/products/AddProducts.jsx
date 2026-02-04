@@ -2,24 +2,14 @@ import React, { useEffect, useState } from 'react'
 import {useFormik} from 'formik'
 import axios from 'axios'
 import {API_URL} from '../../config/API'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 
 const AddProducts = () => {
+  let param = useParams();
   let navigate = useNavigate();
   let [allCate, setAllCate] = useState([])
   let [allSubCate, setAllSubCate] = useState([]);
-
-  useEffect(()=>{
-    axios
-    .get(`${API_URL}/category`)
-    .then(response=>{
-      console.log(response.data.result)
-      setAllCate(response.data.result);
-    })
-  },[])
-
-  let ProFrm = useFormik({
-    initialValues : {
+  let [pro, setPro] = useState({
         title : "",
         price : "",
         categoryId : "",
@@ -31,20 +21,55 @@ const AddProducts = () => {
         color : "",
         size : "",
         detail : ""
-    },
-    onSubmit : (formData)=>{
-      // console.log(formData);
+    });
+
+    useEffect(()=>{
+    axios
+    .get(`${API_URL}/category`)
+    .then(response=>{
+     
+      setAllCate(response.data.result);
+      
+    })
+  },[])
+  useEffect(()=>{
+    if(param.id){
       axios
-      .post(`${API_URL}/product`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+      .get(`${API_URL}/product/edit/${param.id}`)
       .then(response=>{
-          navigate("/product/list")
+        
+        setPro(response.data.result)
+        getSubCateById(response.data.result.categoryId)
       })
+      
+    }
+  },[])
+
+  
+
+  let ProFrm = useFormik({
+    enableReinitialize : true,
+    initialValues : pro,
+    onSubmit : (formData)=>{
+     if(param.id){
+      axios
+       .put(`${API_URL}/product/${param.id}`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+       .then(response=>{
+         navigate("/product/list")
+        })
+     }else{
+
+       axios
+       .post(`${API_URL}/product`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+       .then(response=>{
+         navigate("/product/list")
+        })
+      }
     }
   })
 
-  let getSubCateById = (e)=>{
-    // console.log(e.target.value)
-    let cid = e.target.value; //
+  let getSubCateById = (cid)=>{
+    
     axios
     .get(`${API_URL}/subcategory/getsubcatebycateid/${cid}`)
     .then(response=>{
@@ -62,24 +87,24 @@ const AddProducts = () => {
               <div className="col-md-12 col-lg-12 col-sm-12 stretch-card grid-margin">
                 <div className="card">
                     <div className="card-header">
-                        <h4>Add New Product</h4>
+                        <h4>{param.id ? 'Update' : "Add New"} Product</h4>
                     </div>
                     <div className="card-body">
                       <div className="my-4">
                         <label htmlFor="">Product Title</label>
-                        <input name='title' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
+                        <input value={ProFrm.values.title} name='title' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
                       </div>
                       <div className="my-4">
                         <label htmlFor="">Product Cost Price</label>
-                        <input name='costprice' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
+                        <input value={ProFrm.values.costprice} name='costprice' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
                       </div>
                       <div className="my-4">
                         <label htmlFor="">Product Selling Price (M.R.P.)</label>
-                        <input name='price' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
+                        <input value={ProFrm.values.price} name='price' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
                       </div>
                       <div className="my-4">
                         <label htmlFor="">Category</label>
-                        <select className='form-control' name='categoryId' onChange={(e)=>{ProFrm.handleChange(e); getSubCateById(e)}}>
+                        <select value={ProFrm.values.categoryId} className='form-control' name='categoryId' onChange={(e)=>{ProFrm.handleChange(e); getSubCateById(e.target.value)}}>
                           <option>Select</option>
                           {
                             allCate.map(item=><option value={item._id}>{item.name}</option>)
@@ -88,7 +113,7 @@ const AddProducts = () => {
                       </div>
                       <div className="my-4">
                         <label htmlFor="">Sub-Category</label>
-                        <select className='form-control' name='subcategoryId' onChange={ProFrm.handleChange}>
+                        <select value={ProFrm.values.subcategoryId} className='form-control' name='subcategoryId' onChange={ProFrm.handleChange}>
                           <option>Select</option>
                           {
                             allSubCate.map(item=><option value={item._id}>{item.name}</option>)
@@ -97,11 +122,11 @@ const AddProducts = () => {
                       </div>
                       <div className="my-4">
                         <label htmlFor="">Brand/Company</label>
-                        <input name='brand' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
+                        <input value={ProFrm.values.brand} name='brand' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
                       </div>
                       <div className="my-4">
                         <label htmlFor="">Size</label>
-                        <select name='size' onChange={ProFrm.handleChange} className='form-control'>
+                        <select value={ProFrm.values.size} name='size' onChange={ProFrm.handleChange} className='form-control'>
                           <option>Select</option>
                           <option>S</option>
                           <option>M</option>
@@ -113,32 +138,33 @@ const AddProducts = () => {
                       </div>
                       <div className="my-4">
                         <label htmlFor="">Color</label>
-                        <select name='color' onChange={ProFrm.handleChange} className='form-control'>
+                        <select value={ProFrm.values.color} name='color' onChange={ProFrm.handleChange} className='form-control'>
                           <option>Select</option>
                           <option>White</option>
                           <option>Black</option>
                           <option>Red</option>
                           <option>Blue</option>
                           <option>Green</option>
+                          <option>Brown</option>
                           <option>Yellow</option>
                         </select>
                       </div>
                       <div className="my-4">
                         <label htmlFor="">Quantity</label>
-                        <input name='quantity' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
+                        <input value={ProFrm.values.quantity} name='quantity' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
                       </div>
                       <div className="my-4">
                         <label htmlFor="">Discount(%)</label>
-                        <input name='discount' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
+                        <input value={ProFrm.values.discount} name='discount' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
                       </div>
                       <div className="my-4">
                         <label htmlFor="">Detail</label>
-                        <textarea name='detail' onChange={ProFrm.handleChange} className={'form-control'} ></textarea>
+                        <textarea value={ProFrm.values.detail} name='detail' onChange={ProFrm.handleChange} className={'form-control'} ></textarea>
                       </div>
                     </div>
 
                     <div className="card-footer">
-                      <button type='submit' className='btn btn-success'>Add</button>
+                      <button type='submit' className='btn btn-success'>{param.id ? "Update" : "Add"}</button>
                     </div>
                 </div>
               </div>

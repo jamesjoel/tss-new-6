@@ -3,7 +3,9 @@ import { API_URL } from '../../config/API'
 import axios from 'axios'
 import Modal from 'react-bootstrap/Modal'
 import {ToastContainer, toast} from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 const ListSubCategory = () => {
+    let navigate = useNavigate();
     let [allSubCate, setAllSubCate] = useState([]);
     let [subCate, setSubCate] = useState({});
     let [show, setShow] = useState(false)
@@ -34,6 +36,10 @@ const ListSubCategory = () => {
         })
     }
 
+
+    let goToEdit = (obj)=>{
+        navigate("/subcategory/edit/"+obj._id)
+    }
 
   return (
     <>
@@ -70,6 +76,7 @@ const ListSubCategory = () => {
                             <th>#</th>
                             <th>Sub-Category Name</th>
                             <th>Category Name</th>
+                            <th>Edit</th>
                             <th>Delete</th>
                         </tr>
 
@@ -82,6 +89,11 @@ const ListSubCategory = () => {
                                         <td>{index+1}</td>
                                         <td>{item.name}</td>
                                         <td>{item.categoryId.name}</td>
+                                        <td>
+                                            <button onClick={()=>goToEdit(item)} className='btn btn-info btn-sm'>
+                                                <i className='fa fa-pencil-square'></i>
+                                            </button>
+                                        </td>
                                         <td>
                                             <button onClick={()=>askDelete(item)} className='btn btn-danger btn-sm'>
                                                 <i className='fa fa-trash'></i>

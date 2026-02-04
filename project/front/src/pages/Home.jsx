@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Slider from '../components/Slider'
 import WhyShopWithUs from '../components/WhyShopWithUs'
+import {NavLink} from 'react-router-dom'
 
 import axios from 'axios'
 import ProductBox from '../components/ProductBox'
@@ -26,13 +27,16 @@ const Home = () => {
    return (
       <>
          <Slider title1={"Sale 20% Off"} title2={"New Offer Comming"} text1={"hello"} text2={"world"} />
-         <WhyShopWithUs />
+         
          <section className="product_section layout_padding">
             <div className="container">
                <div className="heading_container heading_center">
-                  <h2>
+                  <div className="d-flex justify-content-between align-items-center w-100">
+                     <h2>
                      Our <span>products</span>
                   </h2>
+                  <NavLink to="/all-products">View All</NavLink>
+                  </div>
                   
                </div>
                <div className="row">
@@ -54,6 +58,7 @@ const Home = () => {
 
             </div>
          </section>
+         <WhyShopWithUs />
       </>
    )
 }

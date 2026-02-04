@@ -1,6 +1,12 @@
 import React from 'react'
-
+import {useNavigate, useParams} from 'react-router-dom'
 const BuyNow = () => {
+    let navigate = useNavigate();
+    let param = useParams();
+    let makePayment = ()=>{
+        
+    }
+
   return (
     <div className="container my-4">
         <div className="row">
@@ -41,7 +47,7 @@ const BuyNow = () => {
 
                         </div>
                     </div>
-                    <button className='btn btn-warning m-2'>Order Summery</button>
+                    <button onClick={makePayment} className='btn btn-warning m-2'>Make Payment</button>
                 </div>
             </div>
         </div>

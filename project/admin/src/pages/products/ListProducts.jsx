@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { API_URL } from '../../config/API'
+import { API_PATH, API_URL } from '../../config/API'
 import { useRef } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import {ToastContainer, toast} from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 const ListProducts = () => {
+  let navigate = useNavigate();
 
   let file = useRef();
 
@@ -48,7 +50,7 @@ const ListProducts = () => {
     let myfile = file.current.files[0];
     let x = new FormData(); // we ceate a Form varible by FormData() class
     x.append("photo", myfile);
-    axios.put(`${API_URL}/product/uploadimage/${proId}`, x)
+    axios.put(`${API_URL}/product/uploadimage/${proId}`, x, {headers : {Authorization : localStorage.getItem("sseccanimda")} })
     .then(response=>{
       // console.log(response.data);
       setShowOverLay("none")
@@ -73,6 +75,10 @@ const ListProducts = () => {
       setShow(false);
       toast("Product Deleted Successfuly.....")
     })
+  }
+
+  let goToEdit = (obj)=>{
+    navigate("/product/edit/"+obj._id);
   }
 
 
@@ -111,6 +117,8 @@ const ListProducts = () => {
                         <th>Category</th>
                         <th>Sub-Category</th>
                         <th>Image</th>
+                        <th>Upload</th>
+                        <th>Edit</th>
                         <th>Delete</th>
                       </tr>
                     </thead>
@@ -125,7 +133,16 @@ const ListProducts = () => {
                               <td>{item.categoryId ? item.categoryId.name : ''}</td>
                               <td>{item.subcategoryId ? item.subcategoryId.name : ''}</td>
                               <td>
+                                <img src={item.image ? `${API_PATH}/product_images/${item.image}` : `${API_PATH}/product_images/pro_avatar.jpg`} style={{height : 50, width : 50}} />
+                              </td>
+                              
+                              <td>
                                 <i onClick={()=>selectUploadImage(item._id)} className='fa fa-upload text-success'></i>
+                              </td>
+                              <td>
+                                <button onClick={()=>goToEdit(item)} className='btn btn-info btn-sm'>
+                                  <i className='fa fa-pencil-square'></i>
+                                </button>
                               </td>
                               <td>
                                 <button onClick={()=>askDelete(item)} className='btn btn-danger btn-sm'>

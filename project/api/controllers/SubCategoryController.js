@@ -9,6 +9,7 @@ let GetAllSubCateByCateId = async(req, res)=>{
 }
 
 let SaveSubCategory = async(req, res)=>{
+    // console.log(req.body);return;
     let result = await SubCate.create(req.body);
     res.send({success: true, result});
 }

@@ -15,6 +15,8 @@ import BuyNow from '../pages/users/BuyNow'
 import ProtactedRoutesWithoutSideNav from './ProtactedRoutesWithoutSideNav'
 import EditProfile from '../pages/users/EditProfile'
 import ChangePassword from '../pages/users/ChangePassword'
+import AllProducts from '../pages/AllProducts'
+import MakePayment from '../pages/users/MakePayment'
 
 const AllRoutes = () => {
   return (
@@ -23,6 +25,7 @@ const AllRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/all-products" element={<AllProducts />} />
         </Route>
 
      
@@ -35,6 +38,7 @@ const AllRoutes = () => {
       <Route path='' element={<ProtactedRoutesWithoutSideNav />}>
           
           <Route path='/buy-now/:id' element={<BuyNow />} />
+          
           <Route path='' element={<ProtactedRoutes />}>
 
             <Route path='/myorders' element={<MyOrders />} />

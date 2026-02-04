@@ -1,4 +1,5 @@
 import React from 'react'
+import {NavLink} from 'react-router-dom'
 
 const TopNav = () => {
   return (
@@ -18,8 +19,8 @@ const TopNav = () => {
                 </a>
                 <div className="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
                   
-                  <a className="dropdown-item" href="#">
-                    <i className="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+                  <NavLink className="dropdown-item" to="/logout">
+                    <i className="mdi mdi-logout mr-2 text-primary"></i> Logout </NavLink>
                 </div>
               </li>
             </ul>

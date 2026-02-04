@@ -1,6 +1,21 @@
 .dropdown-submenu {
     position: relative;
 }
+.dropdown-menu{
+    border : none !important;
+}
+.user-dropdown ul li {
+    float: none;
+}
+.user-dropdown .dropdown-menu{
+    background-color: #FF424D;
+}
+.user-dropdown li a{
+    color: #fff !important;
+    padding: 10px 15px;
+    display: inline-block;
+}
+
 
 .dropdown-submenu>.dropdown-menu {
     top: 0;

@@ -32,6 +32,13 @@ let GetAllProductById = async(req, res)=>{
     let result = await Pro.find({_id : id }).populate("categoryId").populate("subcategoryId").exec();
     res.send({success: true, result : result[0]});
 }
+let GetAllProductByIdForEdit = async(req, res)=>{
+    let id = req.params.id;
+    let result = await Pro.find({_id : id });
+    res.send({success: true, result : result[0]});
+}
+
+
 let UpdateProduct = async(req, res)=>{
     let id = req.params.id;
     let result = await Pro.updateMany({_id : id }, req.body);
@@ -64,7 +71,7 @@ let UploadImage = async(req, res)=>{
 
 }
 
-export {SaveProduct, UpdateProduct, UploadImage, DeleteAllProduct, DeleteProduct, GetAllProduct, GetAllProductById};
+export {SaveProduct, UpdateProduct, GetAllProductByIdForEdit, UploadImage, DeleteAllProduct, DeleteProduct, GetAllProduct, GetAllProductById};
 
 
 /*

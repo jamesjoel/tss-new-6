@@ -2,6 +2,8 @@ import User from "../models/User.js";
 import sha1 from 'sha1'
 import jwt from 'jsonwebtoken'
 import Path from 'path'
+import DoSendMail from "../helpers/SendMailHelper.js";
+import WelcomeMailBody from "../email/WelcomeMail.js";
 
 let SaveUser = async(req, res)=>{
     // console.log(req.body);
@@ -10,6 +12,7 @@ let SaveUser = async(req, res)=>{
     req.body.password = sha1(req.body.password);
     
     let result = await User.create(req.body);
+    await DoSendMail(req.body.email, "Successfuly Registered : Femma.com", WelcomeMailBody);
     res.send({success:true});
 }
 let GetAllUser = async(req, res)=>{

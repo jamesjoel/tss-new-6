@@ -4,12 +4,12 @@ import { API_PATH } from '../config/API'
 const ProductBox = ({item}) => {
   return (
     <div className="col-sm-6 col-md-4 col-lg-4" >
-                           <div className="box" style={{minHeight : "380px"}}>
+                           <div className="box" style={{minHeight : "350px"}}>
                               <div className="option_container">
                                  <div className="options">
-                                    <a href="" className="option1">
+                                    <NavLink to={"/detail/"+item._id} className="option1">
                                        {item.categoryId ? item.categoryId.name : ''}
-                                    </a>
+                                    </NavLink>
                                     <NavLink to={"/detail/"+item._id} className="option2">
                                        Detail
                                     </NavLink>
@@ -17,10 +17,10 @@ const ProductBox = ({item}) => {
                               </div>
                               <div className="img-box">
                                  
-                                 <img src={item.image ? `${API_PATH}/product_images/${item.image}` : `/images/pro_avatar.jpg`} style={{height : "100px"}} alt="" />
+                                 <img style={{width : "300px", height : "270px"}} src={item.image ? `${API_PATH}/product_images/${item.image}` : `${API_PATH}/product_images/pro_avatar.jpg`} alt="" />
                               </div>
                               <div className="detail-box">
-                                 <p>
+                                 <p style={{marginTop : 20, marginLeft : 20, fontSize : 19, fontWeight : "bold"}}>
                                     {item.title}
                                  </p>
                                  

@@ -11,6 +11,7 @@ import Logout from '../pages/Logout'
 import AddProducts from '../pages/products/AddProducts'
 import ListProducts from '../pages/products/ListProducts'
 import ListUsers from '../pages/users/ListUsers'
+import ListAdmins from '../pages/admins/ListAdmins'
 const AllRoutes = () => {
   return (
     <Routes>
@@ -23,10 +24,14 @@ const AllRoutes = () => {
               <Route path='/users/list' element={<ListUsers />} />
               <Route path='/product' element={<AddProducts />} />
               <Route path='/product/list' element={<ListProducts />} />
+              <Route path='/product/edit/:id' element={<AddProducts />} />
               <Route path='/category' element={<AddCategory />} />
               <Route path='/category/list' element={<ListCategory />} />
+              <Route path='/category/edit/:id' element={<AddCategory />} />
               <Route path='/subcategory' element={<AddSubCategory />} />
               <Route path='/subcategory/list' element={<ListSubCategory />} />
+              <Route path='/subcategory/edit/:id' element={<AddSubCategory />} />
+              <Route path='/admins/list' element={<ListAdmins />} />
         </Route>
 
 

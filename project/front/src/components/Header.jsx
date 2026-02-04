@@ -81,7 +81,7 @@ const Header = () => {
                      {
                         localStorage.getItem("access_user")
                         ?
-                        <li className="nav-item dropdown">
+                        <li className="nav-item dropdown user-dropdown">
                         <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span className="nav-label">{localStorage.getItem("name")} <span className="caret"></span></span></a>
                         <ul className="dropdown-menu">   
                            <li><NavLink to='/myprofile'>My Profile</NavLink></li>
