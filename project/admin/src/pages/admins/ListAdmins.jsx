@@ -16,19 +16,57 @@ const ListAdmins = () => {
     let [showPass, setShowPass] = useState(false);
     let [showAdd, setShowAdd] = useState(true);
 
+    let [id, setId] = useState();
+    let [passErr, setPassErr] = useState("");
+
     let [updateAdmin, setUpdateAdmin] = useState( {
             name : "",
             username : ""
         })
 
     useEffect(()=>{
-        axios
-        .get(`${API_URL}/admin`, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
-        .then(response=>{
-            console.log(response.data)
-            setAllAdmin(response.data.result)
-        })
+        if(localStorage.getItem("admin_type")==1){
+
+            axios
+            .get(`${API_URL}/admin`, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+            .then(response=>{
+                
+                setAllAdmin(response.data.result)
+            })
+        }
+        if(localStorage.getItem("admin_type")==2){
+            axios
+            .get(`${API_URL}/admin/getadmin`, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+            .then(response=>{
+                console.log(response.data);
+                setAllAdmin(response.data.result)
+            })
+        }
     },[])
+
+    let updatePass = useFormik({
+        initialValues : {
+            password : "",
+            repass : "",
+            conf_repass : ""
+        },
+        onSubmit : (formData)=>{
+            axios
+            .put(`${API_URL}/admin/updatepassword/${id}`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+            .then(response=>{
+                if(response.data.success==true){
+
+                    updatePass.resetForm({ password : "", repass : "", conf_repass : ""});
+                    setShowAdd(true);
+                    setShowEdit(false)
+                    setShowPass(false)
+                    setPassErr("");
+                }else{
+                    setPassErr("Current Password is not correct")
+                }
+            })
+        }
+    })
 
     let updateFrm = useFormik({
         initialValues : updateAdmin,
@@ -99,7 +137,8 @@ const ListAdmins = () => {
         setShowPass(false);
     }
 
-    let askUpdatePassword = ()=>{
+    let askUpdatePassword = (obj)=>{
+        setId(obj._id);
         setShowPass(true);
         setShowAdd(false);
         setShowEdit(false);
@@ -131,7 +170,7 @@ const ListAdmins = () => {
 
                 <div className="page-header flex-wrap">
                     {
-                        showAdd
+                        localStorage.getItem("admin_type")==1 && showAdd
                         ?
                         <div className="col-md-6 col-lg-6 col-sm-6 stretch-card grid-margin">
                         
@@ -172,6 +211,7 @@ const ListAdmins = () => {
                     :
                     ''
                     }
+                    
                     {
                         showEdit
                         ?
@@ -206,22 +246,23 @@ const ListAdmins = () => {
                         ?
                         <div className="col-md-6 col-lg-6 col-sm-6 stretch-card grid-margin">
                             <div className="card">
-                                <form>
+                                <form onSubmit={updatePass.handleSubmit}>
                                     <div className="card-header">
                                         <h4>Update Password</h4>
                                     </div>
                                     <div className="card-body">
                                         <div className='my-2'>
                                             <label>Current Password</label>
-                                            <input type='password' className='form-control' />
+                                            <input name='password' onChange={updatePass.handleChange} type='password' className='form-control' />
+                                            <small className='text-danger'>{passErr}</small>
                                         </div>
                                         <div className='my-2'>
                                             <label>New Password</label>
-                                            <input type='password' className='form-control' />
+                                            <input name='repass' onChange={updatePass.handleChange}  type='password' className='form-control' />
                                         </div>
                                         <div className='my-2'>
                                             <label>Confirm New Password</label>
-                                            <input type='password' className='form-control' />
+                                            <input name='conf_repass' onChange={updatePass.handleChange} type='password' className='form-control' />
                                         </div>
                                     </div>
                                     <div className="card-footer">
@@ -264,7 +305,7 @@ const ListAdmins = () => {
                                                         
                                                     </td>
                                                     <td>
-                                                        <button onClick={askUpdatePassword} className='btn btn-secondary btn-sm'>
+                                                        <button onClick={()=>askUpdatePassword(item)} className='btn btn-secondary btn-sm'>
                                                             <i class="fa fa-key" aria-hidden="true"></i>
                                                         </button>
                                                     </td>

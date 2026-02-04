@@ -38,10 +38,12 @@ const Login = () => {
             axios
             .post(`${API_URL}/adminauth`, formData)
             .then(response=>{
+                console.log(response.data)
                 if(response.data.success==true){
                     // adminaccess
                     localStorage.setItem("sseccanimda", response.data.token);
                     localStorage.setItem("admin_name", response.data.name);
+                    localStorage.setItem("admin_type", response.data.admintype);
                     navigate("/dashboard");
 
                 }else{
