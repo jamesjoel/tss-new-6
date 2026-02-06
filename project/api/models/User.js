@@ -7,7 +7,9 @@ let UserSchema = mongoose.Schema({
     city : String,
     address : String,
     gender : String,
-    contact : String
+    contact : String,
+    image : {type : String, default : ""},
+    status : { type : Number, default : 1}
 }, { timestamps : true });
 // users
 let User = mongoose.model("user", UserSchema)

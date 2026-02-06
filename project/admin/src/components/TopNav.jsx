@@ -1,4 +1,5 @@
 import React from 'react'
+import {NavLink} from 'react-router-dom'
 
 const TopNav = () => {
   return (
@@ -14,12 +15,12 @@ const TopNav = () => {
               <li className="nav-item nav-profile dropdown border-0">
                 <a className="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown">
                   <img className="nav-profile-img mr-2" alt="" src="/assets/images/faces/face1.jpg" />
-                  <span className="profile-name">Henry Klein</span>
+                  <span className="profile-name">{localStorage.getItem("admin_name")}</span>
                 </a>
                 <div className="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
                   
-                  <a className="dropdown-item" href="#">
-                    <i className="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+                  <NavLink className="dropdown-item" to="/logout">
+                    <i className="mdi mdi-logout mr-2 text-primary"></i> Logout </NavLink>
                 </div>
               </li>
             </ul>

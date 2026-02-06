@@ -2,11 +2,24 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { API_URL } from '../../config/API'
 import { useFormik } from 'formik'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import SubCateSchema from '../../schema/SubCategorySchema'
 
 const AddSubCategory = () => {
+    let param = useParams();
     let navigate = useNavigate();
     let [allCate, setAllCate] = useState([]);
+    let [subCate, setSubCate] = useState({});
+    useEffect(()=>{
+        if(param.id){
+            axios
+            .get(`${API_URL}/subcategory/${param.id}`)
+            .then(response=>{
+                // console.log(response.data)
+                setSubCate(response.data.result);
+            })
+        }
+    },[])
     useEffect(()=>{
         axios
         .get(`${API_URL}/category`)
@@ -16,17 +29,28 @@ const AddSubCategory = () => {
     },[])
 
     let SubCateFrm = useFormik({
-        initialValues : {
-            name : "",
-            categoryId : ""
-        },
+        enableReinitialize : true,
+        validationSchema : SubCateSchema,
+        initialValues : subCate,
         onSubmit : (formData)=>{
-            axios
-            .post(`${API_URL}/subcategory`, formData)
-            .then(response=>{
-                navigate("/subcategory/list")
-                // console.log(response.data);
-            })
+            if(param.id){
+                axios
+                .put(`${API_URL}/subcategory/${param.id}`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+                .then(response=>{
+                    
+                    navigate("/subcategory/list")
+                    
+                })
+            }else{
+
+                axios
+                .post(`${API_URL}/subcategory`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+                .then(response=>{
+                    
+                    navigate("/subcategory/list")
+                    
+                })
+            }
         }
     })
 
@@ -39,16 +63,16 @@ const AddSubCategory = () => {
               <div className="col-md-6 col-lg-6 col-sm-6 stretch-card grid-margin">
                 <div className="card">
                     <div className="card-header">
-                        <h4>Add New Sub-Category</h4>
+                        <h4>{param.id ? "Update" : "Add New"} Sub-Category</h4>
                     </div>
                     <div className="card-body">
                         <div className="my-2">
-                            <label>Name</label>                            
-                            <input name='name' onChange={SubCateFrm.handleChange} type='text' className='form-control' />
+                            <label>Name {SubCateFrm.errors.name && SubCateFrm.touched.name ? <small className='text-danger'>{SubCateFrm.errors.name}</small> : ''}</label>                            
+                            <input value={SubCateFrm.values.name} name='name' onChange={SubCateFrm.handleChange} type='text' className={'form-control '+(SubCateFrm.errors.name && SubCateFrm.touched.name ? 'is-invalid' : '')} />
                         </div>
                         <div className="my-3">
-                            <label>Category</label>
-                            <select name='categoryId' onChange={SubCateFrm.handleChange} className='form-control'>
+                            <label>Category {SubCateFrm.errors.categoryId && SubCateFrm.touched.categoryId ? <small className='text-danger'>{SubCateFrm.errors.categoryId}</small> : ''}</label>
+                            <select value={SubCateFrm.values.categoryId} name='categoryId' onChange={SubCateFrm.handleChange} className={'form-control '+(SubCateFrm.errors.categoryId && SubCateFrm.touched.categoryId ? 'is-invalid' : '')}>
                                 <option>Select</option>
                                 {
                                     allCate.map(item=>{
@@ -61,7 +85,7 @@ const AddSubCategory = () => {
                         </div>
                     </div>
                     <div className="card-footer">
-                        <button type='submit' className='btn btn-success'>Add</button>
+                        <button type='submit' className='btn btn-success'>{param.id ? "Update" : "Add"}</button>
                     </div>
                 </div>
             
@@ -74,3 +98,14 @@ const AddSubCategory = () => {
 }
 
 export default AddSubCategory
+/*
+
+let [x, setX] = useState()
+let [x, setX] = useState({})
+
+
+
+{x.name}
+
+
+*/

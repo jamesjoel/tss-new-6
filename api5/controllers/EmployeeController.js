@@ -2,6 +2,7 @@ import EmpModel from "../models/EmpModel.js";
 let GetAllEmployee = async(req, res)=>{
     let result = await EmpModel.find();
     res.send(result)
+
 }
 
 

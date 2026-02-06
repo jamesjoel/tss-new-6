@@ -11,7 +11,7 @@ let App = ()=>{
         
         <Header />
         
-        <div className="container my-5" style={{minHeight : "600px"}}>
+        <div className="" style={{minHeight : "600px"}}>
         <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />

@@ -17,7 +17,7 @@ const SideNav = () => {
                 
               </div>
               <div className="nav-profile-text d-flex flex-column pr-3">
-                <span className="font-weight-medium mb-2">Admin</span>
+                <span className="font-weight-medium mb-2">{localStorage.getItem("admin_name")}</span>
                 
               </div>
               
@@ -75,10 +75,10 @@ const SideNav = () => {
             <div className="collapse" id="pro">
               <ul className="nav flex-column sub-menu">
                 <li className="nav-item">
-                  <a className="nav-link" href="pages/ui-features/buttons.html">Add</a>
+                  <NavLink className="nav-link" to="/product">Add</NavLink>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="pages/ui-features/dropdowns.html">List</a>
+                  <NavLink className="nav-link" to="/product/list">List</NavLink>
                 </li>
                 
               </ul>
@@ -94,7 +94,8 @@ const SideNav = () => {
             <div className="collapse" id="user">
               <ul className="nav flex-column sub-menu">
                 <li className="nav-item">
-                  <a className="nav-link" href="pages/ui-features/buttons.html">Add</a>
+                  <NavLink className="nav-link" to="/users/list">List</NavLink>
+
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="pages/ui-features/dropdowns.html">List</a>
@@ -103,12 +104,29 @@ const SideNav = () => {
               </ul>
             </div>
           </li>
+           <li className="nav-item">
+            <a className="nav-link" data-toggle="collapse" href="#setting" aria-expanded="false" aria-controls="ui-basic">
+              <i className="mdi mdi-tune menu-icon"></i>
+              <span className="menu-title">Settings</span>
+              <i className="menu-arrow"></i>
+            </a>
+            <div className="collapse" id="setting">
+              <ul className="nav flex-column sub-menu">
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/admins/list">Add New Admin</NavLink>
+
+                </li>
+                
+                
+              </ul>
+            </div>
+          </li>
           
           <li className="nav-item">
-            <a className="nav-link" href="index.html">
+            <NavLink className="nav-link" to="/logout">
               <i className="mdi mdi-logout menu-icon"></i>
               <span className="menu-title">Logout</span>
-            </a>
+            </NavLink>
           </li>
           
           

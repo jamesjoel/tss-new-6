@@ -3,21 +3,17 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useFormik } from 'formik'
 import { API_URL } from '../config/API'
-import * as YUP from 'yup'
-let SignupSchema = YUP.object({
-    name : YUP.string().required("Insert Your Full Name"),
-    email : YUP.string().email("Incorrect Email Id").required("Insert Your Email Id"),
-    password : YUP.string().required("Insert Password"),
-    repassword : YUP.string().oneOf([YUP.ref("password")], "Password and Re-Password Should be same").required("Insert Re-Password"),
-    contact : YUP.number().typeError("Only Number are accepted").min(1000000000, "Number Not Less Then 10").max(9999999999, "Number not more then 10").required("Insert Contact Number"),
-    address : YUP.string().required("Insert Full Address"),
-    gender : YUP.string().required("Select Your Gender"),
-    city : YUP.string().required("Select Your City"),
-})
-
-
+import SignupSchema from '../schema/SignupSchema'
 const Signup = () => {
     let navigate = useNavigate();
+    useEffect(()=>{
+            if(localStorage.getItem("access_user")){
+                navigate("/myprofile")
+            }
+        },[])
+
+    let [pwdType, setPwdType] = useState("password");
+    let [pwdClass, setPwdClass] = useState("fa-eye-slash")
     let [allCity, setAllCity] = useState([]);
 
     useEffect(()=>{
@@ -44,8 +40,7 @@ const Signup = () => {
 
         },
         onSubmit : (formData)=>{
-            console.log("***********", formData)
-            return;
+            
             // we have to post this "formData" by axios
             axios
             .post(`${API_URL}/user`, formData)
@@ -56,6 +51,17 @@ const Signup = () => {
         }
     })
 
+    let showPass = ()=>{
+        if(pwdType=="password")
+        {
+            setPwdType("text");
+            setPwdClass("fa-eye")
+        }else{
+            
+            setPwdClass("fa-eye-slash")
+            setPwdType("password");
+        }
+    }
 
 
   return (
@@ -90,10 +96,16 @@ const Signup = () => {
                                 :
                                 ''
                             }
-                        </div>    
+                        </div>  
+                        
                         <div className='mt-4'>
                             <label>Password</label>
-                            <input name='password' onChange={SignupFrm.handleChange} type='password' className={'form-control '+(SignupFrm.errors.password && SignupFrm.touched.password ? 'is-invalid' : '')} placeholder='Password' />
+                            <div className='input-group'>
+                                <input name='password' onChange={SignupFrm.handleChange} type={pwdType} className={'form-control '+(SignupFrm.errors.password && SignupFrm.touched.password ? 'is-invalid' : '')} placeholder='Password' />
+                                <div className='input-group-append'>
+                                    <button type='button' onClick={showPass} className='btn btn-dark'><i class={"fa "+pwdClass} aria-hidden="true"></i></button>
+                                </div>
+                            </div>
                             {
                                 SignupFrm.errors.password && SignupFrm.touched.password
                                 ?

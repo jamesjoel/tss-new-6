@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import Slider from '../components/Slider'
 import WhyShopWithUs from '../components/WhyShopWithUs'
+import {NavLink} from 'react-router-dom'
 
 import axios from 'axios'
+import ProductBox from '../components/ProductBox'
+import {API_URL} from '../config/API'
 const Home = () => {
 
    let [product, setProduct] = useState([]);
 
    useEffect(()=>{
       axios
-         .get("https://fakestoreapi.com/products")
+         .get(`${API_URL}/product`)
          .then(response => {
             // console.log(response.data);
-            setProduct(response.data);
+            setProduct(response.data.result);
          })
    },[])
 
@@ -23,14 +26,17 @@ const Home = () => {
 
    return (
       <>
-         <Slider />
-         <WhyShopWithUs />
+         <Slider title1={"Sale 20% Off"} title2={"New Offer Comming"} text1={"hello"} text2={"world"} />
+         
          <section className="product_section layout_padding">
             <div className="container">
                <div className="heading_container heading_center">
-                  <h2>
+                  <div className="d-flex justify-content-between align-items-center w-100">
+                     <h2>
                      Our <span>products</span>
                   </h2>
+                  <NavLink to="/all-products">View All</NavLink>
+                  </div>
                   
                </div>
                <div className="row">
@@ -39,30 +45,7 @@ const Home = () => {
                   {
                      product.map(item => {
                         return(
-                           <div className="col-sm-6 col-md-4 col-lg-4" >
-                           <div className="box" style={{minHeight : "380px"}}>
-                              <div className="option_container">
-                                 <div className="options">
-                                    <a href="" className="option1">
-                                       {item.category}
-                                    </a>
-                                    <a href="" className="option2">
-                                       ${item.price}
-                                    </a>
-                                 </div>
-                              </div>
-                              <div className="img-box">
-                                 
-                                 <img src={item.image} alt="" />
-                              </div>
-                              <div className="detail-box">
-                                 <p>
-                                    {item.title}
-                                 </p>
-                                 
-                              </div>
-                           </div>
-                        </div>
+                           <ProductBox item={item} />
                         )
                      })
                   }
@@ -75,6 +58,7 @@ const Home = () => {
 
             </div>
          </section>
+         <WhyShopWithUs />
       </>
    )
 }
