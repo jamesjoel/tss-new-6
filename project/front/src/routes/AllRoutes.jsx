@@ -17,6 +17,9 @@ import EditProfile from '../pages/users/EditProfile'
 import ChangePassword from '../pages/users/ChangePassword'
 import AllProducts from '../pages/AllProducts'
 import MakePayment from '../pages/users/MakePayment'
+import ForgotPassword from '../pages/ForgotPassword'
+import Otp from '../pages/Otp'
+import ForgotPasswordUpdate from '../pages/ForgotPasswordUpdate'
 
 const AllRoutes = () => {
   return (
@@ -25,7 +28,11 @@ const AllRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/otp" element={<Otp />} />
+          <Route path="/update-password" element={<ForgotPasswordUpdate />} />
           <Route path="/all-products" element={<AllProducts />} />
+
         </Route>
 
      

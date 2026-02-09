@@ -92,6 +92,9 @@ const Login = () => {
                     </div>
                     <div className="card-footer bg-dark-blue">
                         <button type='submit' className='btn btn-light'>Login</button>
+                        <br />
+                        <br />
+                    <NavLink className='text-light' to='/forgot-password'>Forgot Your Password</NavLink>
                     </div>
                 </div>
             </div>
