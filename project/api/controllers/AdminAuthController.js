@@ -9,7 +9,7 @@ let Auth = async(req, res)=>{
         if(result[0].password == sha1(password)){
             let obj = { id : result[0]._id};
             let token = jwt.sign(obj, ENC_KEY)
-            res.send({success:true, name : result[0].name, token : token});
+            res.send({success:true, name : result[0].name, token : token, admintype : result[0].status});
         }else{
             
             res.send({success:false})

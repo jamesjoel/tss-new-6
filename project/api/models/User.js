@@ -9,7 +9,8 @@ let UserSchema = mongoose.Schema({
     gender : String,
     contact : String,
     image : {type : String, default : ""},
-    status : { type : Number, default : 1}
+    status : { type : Number, default : 1},
+    otp : Number
 }, { timestamps : true });
 // users
 let User = mongoose.model("user", UserSchema)
