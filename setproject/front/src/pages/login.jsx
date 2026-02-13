@@ -12,7 +12,7 @@ let loginSchema= YUP.object({
    password: YUP.string().required("insert your password")
 })
    const Login = () => { 
-   let Navigate=useNavigate();
+   let navigate=useNavigate();
    let [errmsg,seterrmsg]=useState("");
 
   let showNotification = ()=>{
@@ -37,8 +37,10 @@ let loginSchema= YUP.object({
        localStorage.setItem("name",Response.data.name);
        localStorage.setItem("access_user",Response.data.token);
 
-      toast("you are successful logged In..")
-      Navigate("/");
+      toast("you are successful logged In..", {
+        onClose : ()=>{
+        navigate("/");
+      }})
       }
       
       // }
@@ -105,7 +107,7 @@ let loginSchema= YUP.object({
           </div>
         </div>
       </div>
-      <Navigate to='/'/>
+      
     </>
   )
 }

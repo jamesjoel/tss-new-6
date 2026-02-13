@@ -29,13 +29,6 @@
 }
 
 /* Hide all dropdowns */
-.dropdown {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 180px;
-}
 
 /* Show dropdown on hover */
 .menu li:hover > .dropdown {

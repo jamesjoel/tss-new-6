@@ -13,6 +13,27 @@ const About = () => {
     })
   }
 
+  let order = ()=>{
+    axios
+    .get(`${API_URL}/city/payment`)
+    .then(response=>{
+      if(response.data.success==true){
+        let option = {
+          key : "rzp_test_Rek8z2OtrReaiV",
+          amount : 500*100,
+          currency : "INR",
+          order_id : response.data.orderId,
+          handler : async(data)=>{
+            console.log(data);
+          }
+        }
+
+        let rzpy = window.Razorpay(option);
+        rzpy.open();
+      }
+    })
+  }
+
   return (
     <div className="container my-4">
       <div className="row">
@@ -21,6 +42,9 @@ const About = () => {
           <br />
           <button onClick={send} className='btn btn-primary'>Send</button>
           <p>{msg}</p>
+          <br />
+          <br />
+          <button onClick={order} className='btn btn-primary'>Checkout 100.00</button>
         </div>
       </div>
     </div>

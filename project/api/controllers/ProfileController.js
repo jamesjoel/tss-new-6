@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import User from '../models/User.js'
 import sha1 from 'sha1'
 let MyProfile = async(req, res)=>{
-    let result = await User.find({_id : req.userobj.id}, ["-password", "-image", "-status", "-_id", "-updatedAt", "-createdAt"]);
+    let result = await User.find({_id : req.userobj.id}, ["-password", "-image", "-status", "-updatedAt", "-createdAt"]);
     res.send({success:true, result : result[0]});
    
 }

@@ -22,7 +22,7 @@ let SendMail = async(req, res)=>{
 }
 
 let DoPayment = async(req, res)=>{
-    let amount = 100;
+    let amount = 500;
     try{
         const order = await rzpy.orders.create({
             amount : amount*100,

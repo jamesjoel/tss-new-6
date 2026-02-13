@@ -11,6 +11,7 @@ import IsUserLoggedIn from '../util/IsUserLoggedIn.js'
 import AdminRoutes from './AdminRoutes.js'
 import IsAdminLoggedIn from '../util/IsAdminLoggedIn.js'
 import ForgotPasswordRoutes from './ForgotPasswordRoutes.js'
+import OrderRoutes from './OrderRoutes.js'
 
 
 let routes = express.Router();
@@ -25,5 +26,7 @@ routes.use("/api/v1/adminauth", AdminAuthRoutes);
 routes.use("/api/v1/product", ProductRoutes);
 routes.use("/api/v1/admin", IsAdminLoggedIn ,AdminRoutes);
 routes.use("/api/v1/forgotpassword", ForgotPasswordRoutes);
+routes.use("/api/v1/order", OrderRoutes);
+
 
 export default routes;
