@@ -1,12 +1,12 @@
 import Pro from '../models/Product.js';
 import jwt from 'jsonwebtoken'
-import { ENC_KEY } from '../config/config.js';
+
 import PATH from 'path'
 
 let SaveProduct = async(req, res)=>{
     if(req.headers.authorization){
         let token = req.headers.authorization;
-        let obj = jwt.decode(token, ENC_KEY)
+        let obj = jwt.decode(token, process.env.ENC_KEY)
         if(obj){
             // console.log(req.body);return;
             let result = await Pro.create(req.body);

@@ -28,7 +28,7 @@ const ListAdmins = () => {
         if(localStorage.getItem("admin_type")==1){
 
             axios
-            .get(`${API_URL}/admin`, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+            .get(`${import.meta.env.VITE_API_URL}/admin`, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
             .then(response=>{
                 
                 setAllAdmin(response.data.result)
@@ -36,7 +36,7 @@ const ListAdmins = () => {
         }
         if(localStorage.getItem("admin_type")==2){
             axios
-            .get(`${API_URL}/admin/getadmin`, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+            .get(`${import.meta.env.VITE_API_URL}/admin/getadmin`, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
             .then(response=>{
                 console.log(response.data);
                 setAllAdmin(response.data.result)
@@ -52,7 +52,7 @@ const ListAdmins = () => {
         },
         onSubmit : (formData)=>{
             axios
-            .put(`${API_URL}/admin/updatepassword/${id}`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+            .put(`${import.meta.env.VITE_API_URL}/admin/updatepassword/${id}`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
             .then(response=>{
                 if(response.data.success==true){
 
@@ -73,7 +73,7 @@ const ListAdmins = () => {
         enableReinitialize : true,
         onSubmit : (formData)=>{
             axios
-            .put(`${API_URL}/admin/${updateAdmin._id}`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+            .put(`${import.meta.env.VITE_API_URL}/admin/${updateAdmin._id}`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
             .then(response=>{
                 setAllAdmin(prev=>prev.map(item=>{
                     if(item._id == updateAdmin._id){
@@ -98,7 +98,7 @@ const ListAdmins = () => {
         },
         onSubmit : (formData)=>{
             axios
-            .post(`${API_URL}/admin`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+            .post(`${import.meta.env.VITE_API_URL}/admin`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
             .then(response=>{
                 // console.log(response.data)
                 setAllAdmin(prev=>[...prev, response.data.result]);
@@ -116,7 +116,7 @@ const ListAdmins = () => {
     let hideDeleteBox = ()=>setShow(false)
     let confDelete = ()=>{
         axios
-        .delete(`${API_URL}/admin/${admin._id}`,{headers : {Authorization : localStorage.getItem("sseccanimda")}})
+        .delete(`${import.meta.env.VITE_API_URL}/admin/${admin._id}`,{headers : {Authorization : localStorage.getItem("sseccanimda")}})
         .then(response=>{
             setShow(false);
             setAllAdmin(prev=>prev.filter(item=>item._id!=admin._id));

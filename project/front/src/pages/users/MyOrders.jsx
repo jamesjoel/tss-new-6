@@ -7,7 +7,7 @@ const MyOrders = () => {
   let [allOrder, setAllOrder] = useState([]);
   useEffect(()=>{
     axios
-    .get(`${API_URL}/order/getall`, { headers : {Authorization : localStorage.getItem("access_user")}})
+    .get(`${import.meta.env.VITE_API_URL}/order/getall`, { headers : {Authorization : localStorage.getItem("access_user")}})
     .then(response=>{
       console.log(response.data)
       setAllOrder(response.data.result)

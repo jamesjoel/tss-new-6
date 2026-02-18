@@ -13,10 +13,12 @@ const Header = () => {
    let [allCate, setAllCate] = useState([])
 
    useEffect(() => {
+      console.log(import.meta.env.VITE_API_URL)
       axios
 
-         .get(API_URL + "/category/subcate")
+         .get(import.meta.env.VITE_API_URL + "/category/subcate")
          .then(response => {
+            console.log(response.data.result);
             setAllCate(response.data.result);
          })
    }, [])

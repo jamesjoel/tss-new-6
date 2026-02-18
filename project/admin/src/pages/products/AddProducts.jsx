@@ -25,7 +25,7 @@ const AddProducts = () => {
 
     useEffect(()=>{
     axios
-    .get(`${API_URL}/category`)
+    .get(`${import.meta.env.VITE_API_URL}/category`)
     .then(response=>{
      
       setAllCate(response.data.result);
@@ -35,7 +35,7 @@ const AddProducts = () => {
   useEffect(()=>{
     if(param.id){
       axios
-      .get(`${API_URL}/product/edit/${param.id}`)
+      .get(`${import.meta.env.VITE_API_URL}/product/edit/${param.id}`)
       .then(response=>{
         
         setPro(response.data.result)
@@ -53,14 +53,14 @@ const AddProducts = () => {
     onSubmit : (formData)=>{
      if(param.id){
       axios
-       .put(`${API_URL}/product/${param.id}`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+       .put(`${import.meta.env.VITE_API_URL}/product/${param.id}`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
        .then(response=>{
          navigate("/product/list")
         })
      }else{
 
        axios
-       .post(`${API_URL}/product`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+       .post(`${import.meta.env.VITE_API_URL}/product`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
        .then(response=>{
          navigate("/product/list")
         })
@@ -71,7 +71,7 @@ const AddProducts = () => {
   let getSubCateById = (cid)=>{
     
     axios
-    .get(`${API_URL}/subcategory/getsubcatebycateid/${cid}`)
+    .get(`${import.meta.env.VITE_API_URL}/subcategory/getsubcatebycateid/${cid}`)
     .then(response=>{
       // console.log(response.data)
       setAllSubCate(response.data.result);

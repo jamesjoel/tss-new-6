@@ -24,7 +24,7 @@ const ListProducts = () => {
 
   useEffect(()=>{
     axios
-    .get(`${API_URL}/product`)
+    .get(`${import.meta.env.VITE_API_URL}/product`)
     .then(response=>{
       setAllPro(response.data.result);
     })
@@ -50,7 +50,7 @@ const ListProducts = () => {
     let myfile = file.current.files[0];
     let x = new FormData(); // we ceate a Form varible by FormData() class
     x.append("photo", myfile);
-    axios.put(`${API_URL}/product/uploadimage/${proId}`, x, {headers : {Authorization : localStorage.getItem("sseccanimda")} })
+    axios.put(`${import.meta.env.VITE_API_URL}/product/uploadimage/${proId}`, x, {headers : {Authorization : localStorage.getItem("sseccanimda")} })
     .then(response=>{
       // console.log(response.data);
       setShowOverLay("none")
@@ -68,7 +68,7 @@ const ListProducts = () => {
   let confDelete = ()=>{
     setPreLoader(true);
     axios
-    .delete(`${API_URL}/product/${pro._id}`)
+    .delete(`${import.meta.env.VITE_API_URL}/product/${pro._id}`)
     .then(response=>{
       setPreLoader(false);
       setAllPro(curr=>curr.filter(item=>item._id != pro._id));
@@ -133,7 +133,7 @@ const ListProducts = () => {
                               <td>{item.categoryId ? item.categoryId.name : ''}</td>
                               <td>{item.subcategoryId ? item.subcategoryId.name : ''}</td>
                               <td>
-                                <img src={item.image ? `${API_PATH}/product_images/${item.image}` : `${API_PATH}/product_images/pro_avatar.jpg`} style={{height : 50, width : 50}} />
+                                <img src={item.image ? `${import.meta.env.VITE_API_PATH}/product_images/${item.image}` : `${import.meta.env.VITE_API_PATH}/product_images/pro_avatar.jpg`} style={{height : 50, width : 50}} />
                               </td>
                               
                               <td>

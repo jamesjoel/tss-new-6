@@ -1,0 +1,18 @@
+{
+  "student": [
+    {
+      "id": "eb1c",
+      "name": "Gaurav",
+      "fee": "5400",
+      "class": "3",
+      "contact": "541857484"
+    },
+    {
+      "id": "01a7",
+      "name": "Amar Johi",
+      "fee": "8000",
+      "class": "6",
+      "contact": "21545444"
+    }
+  ]
+}

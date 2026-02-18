@@ -10,7 +10,7 @@ const Detail = () => {
     let param = useParams();
     useEffect(()=>{
         axios
-        .get(`${API_URL}/product/${param.a}`)
+        .get(`${import.meta.env.VITE_API_URL}/product/${param.a}`)
         .then(response=>{
             // console.log(response.data.result)
             setPro(response.data.result);
@@ -47,7 +47,7 @@ const Detail = () => {
         <div className="row">
             <div className="col-md-5">
                 <div className="px-4">
-                    <img src={pro.image ? `${API_PATH}/product_images/${pro.image}` : `/images/pro_avatar.jpg`} className='img-thumbnail' style={{height : 400, width : "100%"}}/>
+                    <img src={pro.image ? `${import.meta.env.VITE_API_PATH}/product_images/${pro.image}` : `/images/pro_avatar.jpg`} className='img-thumbnail' style={{height : 400, width : "100%"}}/>
                 <div className='d-flex justify-content-around mt-3'>
                     <button onClick={checkUserLoggedIn} className='btn-orange '><i class="fa fa-bolt" aria-hidden="true"></i> Buy Now</button>
                     <NavLink to='' className='btn-orange '> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add To Cart</NavLink>

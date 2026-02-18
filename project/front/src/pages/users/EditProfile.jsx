@@ -12,7 +12,7 @@ const EditProfile = () => {
     let [allCity, setAllCity] = useState([])
     useEffect(()=>{
         axios
-        .get(`${API_URL}/profile`, {headers : {Authorization : localStorage.getItem("access_user")}})
+        .get(`${import.meta.env.VITE_API_URL}/profile`, {headers : {Authorization : localStorage.getItem("access_user")}})
         .then(response=>{
             console.log(response.data)
             setUser(response.data.result);
@@ -20,7 +20,7 @@ const EditProfile = () => {
     },[])
 
     useEffect(()=>{
-        axios.get(`${API_URL}/city`).then(response=>{
+        axios.get(`${import.meta.env.VITE_API_URL}/city`).then(response=>{
             setAllCity(response.data)
         })
     },[])
@@ -33,7 +33,7 @@ const EditProfile = () => {
         onSubmit : (formData)=>{
             // console.log(formData)
             axios
-            .put(`${API_URL}/profile`, formData, { headers : {Authorization : localStorage.getItem("access_user")}})
+            .put(`${import.meta.env.VITE_API_URL}/profile`, formData, { headers : {Authorization : localStorage.getItem("access_user")}})
             .then(response=>{
                 // console.log(response.data)
                 localStorage.setItem("name", formData.name);

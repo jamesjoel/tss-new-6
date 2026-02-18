@@ -15,7 +15,7 @@ const ChangePassword = () => {
         },
         onSubmit : (formData)=>{
             axios
-            .put(`${API_URL}/profile/changepassword`, formData, {headers : {Authorization : localStorage.getItem("access_user")}})
+            .put(`${import.meta.env.VITE_API_URL}/profile/changepassword`, formData, {headers : {Authorization : localStorage.getItem("access_user")}})
             .then(response=>{
                 console.log(response.data);
                 if(response.data.success==true){

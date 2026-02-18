@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import "./AllProducts.css"
-import { API_URL } from '../config/API';
+
 import ProductBox from '../components/ProductBox';
 import axios from 'axios'
 import Slider from '../components/Slider'
@@ -10,7 +10,7 @@ const AllProducts = () => {
 
    useEffect(()=>{
       axios
-         .get(`${API_URL}/product`)
+         .get(`${import.meta.env.VITE_API_URL}/product`)
          .then(response => {
             // console.log(response.data);
             setProduct(response.data.result);

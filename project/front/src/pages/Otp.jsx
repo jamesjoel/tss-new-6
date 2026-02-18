@@ -23,7 +23,7 @@ const Otp = () => {
         },
         onSubmit : (formData)=>{
             formData.email = localStorage.getItem("efp");
-            axios.post(`${API_URL}/forgotpassword/otp`, formData)
+            axios.post(`${import.meta.env.VITE_API_URL}/forgotpassword/otp`, formData)
             .then(response=>{
               if(response.data.success==true){  
                     navigate("/update-password");

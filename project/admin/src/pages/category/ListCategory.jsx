@@ -17,7 +17,7 @@ const ListCategory = () => {
 
   useEffect(()=>{
     axios
-    .get(API_URL+"/category")
+    .get(import.meta.env.VITE_API_URL+"/category")
     .then(response=>{
       setAllCate(response.data.result);
     })
@@ -32,7 +32,7 @@ const ListCategory = () => {
   let confDelete = ()=>{
     setPreLoader(true)
     axios
-    .delete(`${API_URL}/category/${cate._id}`, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+    .delete(`${import.meta.env.VITE_API_URL}/category/${cate._id}`, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
     .then(response=>{
       setPreLoader(false)
       setShow(false);

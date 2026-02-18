@@ -6,7 +6,7 @@ const ListUsers = () => {
     let [allUser, setAllUser] = useState([]);
     useEffect(()=>{
         axios
-        .get(`${API_URL}/user`, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+        .get(`${import.meta.env.VITE_API_URL}/user`, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
         .then(response=>{
             setAllUser(response.data.result);
         })
@@ -17,7 +17,7 @@ const ListUsers = () => {
         // console.log(obj)
         // console.log(s)
         axios
-        .put(`${API_URL}/user/changestatus/${obj._id}`, {status: s})
+        .put(`${import.meta.env.VITE_API_URL}/user/changestatus/${obj._id}`, {status: s})
         .then(response=>{
             // console.log(response.data);
             setAllUser(curr=>curr.map(item=>{

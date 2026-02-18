@@ -5,6 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev" : "nodemon --env-file=.dev.env app.js",
+    "prod" : "node --env-file=.prod.env app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

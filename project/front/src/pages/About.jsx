@@ -6,7 +6,7 @@ const About = () => {
   let [msg, setMsg] = useState("")
   let send = ()=>{
     axios
-    .get(`${API_URL}/city/sendmail`)
+    .get(`${import.meta.env.VITE_API_URL}/city/sendmail`)
     .then(response=>{
       console.log(response.data)
       setMsg("Email Send Successfuly....")
@@ -15,7 +15,7 @@ const About = () => {
 
   let order = ()=>{
     axios
-    .get(`${API_URL}/city/payment`)
+    .get(`${import.meta.env.VITE_API_URL}/city/payment`)
     .then(response=>{
       if(response.data.success==true){
         let option = {

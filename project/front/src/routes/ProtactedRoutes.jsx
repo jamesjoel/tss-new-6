@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
 import { Outlet, useNavigate, NavLink } from 'react-router-dom'
-import { API_URL, API_PATH } from '../config/API';
+// import { API_URL, API_PATH } from '../config/API';
 
 const ProtactedRoutes = () => {
     let file = useRef();
@@ -16,11 +16,11 @@ const ProtactedRoutes = () => {
     
   useEffect(()=>{
     axios
-    .get(`${API_URL}/profile/profilepic`, { headers : {Authorization : localStorage.getItem("access_user")}})
+    .get(`${import.meta.env.VITE_API_URL}/profile/profilepic`, { headers : {Authorization : localStorage.getItem("access_user")}})
     .then(response=>{
       // console.log(response.data.result);
       setUser(response.data.result);
-      let name = response.data.result.image == "" ? API_PATH+"/user_images/avatar.jpg" : API_PATH+"/user_images/"+response.data.result.image;
+      let name = response.data.result.image == "" ? import.meta.env.VITE_API_PATH+"/user_images/avatar.jpg" : API_PATH+"/user_images/"+response.data.result.image;
       setPic(name)
     })
   },[])
@@ -44,10 +44,10 @@ const ProtactedRoutes = () => {
       let MyFormData = new FormData();
       MyFormData.append("image", filedata);
       axios
-      .put(`${API_URL}/user/profilepic`, MyFormData, { headers : {Authorization : localStorage.getItem("access_user")}})
+      .put(`${import.meta.env.VITE_API_URL}/user/profilepic`, MyFormData, { headers : {Authorization : localStorage.getItem("access_user")}})
       .then(response=>{
         // console.log(response.data);
-        setPic(API_PATH+"/user_images/"+response.data.name)
+        setPic(import.meta.env.VITE_API_PATH+"/user_images/"+response.data.name)
       })
     }
   return (

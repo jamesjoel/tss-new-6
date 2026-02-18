@@ -12,7 +12,7 @@ const Home = () => {
 
    useEffect(()=>{
       axios
-         .get(`${API_URL}/product`)
+         .get(`${import.meta.env.VITE_API_URL}/product`)
          .then(response => {
             // console.log(response.data);
             setProduct(response.data.result);

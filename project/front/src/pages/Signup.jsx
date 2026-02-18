@@ -18,7 +18,7 @@ const Signup = () => {
 
     useEffect(()=>{
         axios
-        .get(`${API_URL}/city`)
+        .get(`${import.meta.env.VITE_API_URL}/city`)
         .then(response=>{
             // console.log(response.data);
             setAllCity(response.data);
@@ -43,7 +43,7 @@ const Signup = () => {
             
             // we have to post this "formData" by axios
             axios
-            .post(`${API_URL}/user`, formData)
+            .post(`${import.meta.env.VITE_API_URL}/user`, formData)
             .then(response=>{
                 // console.log(response.data)
                 navigate("/");

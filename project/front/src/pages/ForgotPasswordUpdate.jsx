@@ -2,7 +2,7 @@ import React from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import axios from 'axios'
-import { API_URL } from '../config/API'
+
 const ForgotPasswordUpdate = () => {
 
     let navigate = useNavigate();
@@ -19,7 +19,7 @@ const ForgotPasswordUpdate = () => {
         onSubmit : (formData)=>{
             formData.email = localStorage.getItem("efp");
             axios
-            .post(`${API_URL}/forgotpassword/update`, formData)
+            .post(`${import.meta.env.VITE_API_URL}/forgotpassword/update`, formData)
             .then(response=>{
                 localStorage.removeItem("efp");
                 navigate("/login");

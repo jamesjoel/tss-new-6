@@ -15,7 +15,7 @@ const AddCategory = () => {
   useEffect(()=>{
     if(param.id){
       axios
-      .get(`${API_URL}/category/${param.id}`)
+      .get(`${import.meta.env.VITE_API_URL}/category/${param.id}`)
       .then(response=>{
         // console.log(response.data)
         setCate(response.data.result)
@@ -31,14 +31,14 @@ const AddCategory = () => {
     onSubmit : (formData)=>{
       if(param.id){
            axios
-        .put(`${API_URL}/category/${param.id}`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+        .put(`${import.meta.env.VITE_API_URL}/category/${param.id}`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
         .then(response=>{
           navigate("/category/list")  
         })
       }else{
 
         axios
-        .post(`${API_URL}/category`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+        .post(`${import.meta.env.VITE_API_URL}/category`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
         .then(response=>{
           navigate("/category/list")  
         })

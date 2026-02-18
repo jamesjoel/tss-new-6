@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
-import { ENC_KEY } from '../config/config.js';
+// import { ENC_KEY } from '../config/config.js';
+let ENC_KEY = process.env.ENC_KEY;
 let IsUserLoggedIn = (req, res, next)=>{
      if(req.headers.authorization){
         let token = req.headers.authorization;

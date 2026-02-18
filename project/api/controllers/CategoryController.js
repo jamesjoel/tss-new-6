@@ -2,12 +2,12 @@ import Cate from '../models/Category.js';
 import SubCate from '../models/SubCategory.js'
 import Product from '../models/Product.js'
 import jwt from 'jsonwebtoken'
-import { ENC_KEY } from '../config/config.js';
+
 
 let SaveCategory = async(req, res)=>{
     if(req.headers.authorization){
         let token = req.headers.authorization;
-        let obj = jwt.decode(token, ENC_KEY)
+        let obj = jwt.decode(token, process.env.ENC_KEY)
         if(obj){
             let result = await Cate.create(req.body);
             res.send({success: true, result});

@@ -17,7 +17,7 @@ const ProductBox = ({item}) => {
                               </div>
                               <div className="img-box">
                                  
-                                 <img style={{width : "300px", height : "270px"}} src={item.image ? `${API_PATH}/product_images/${item.image}` : `${API_PATH}/product_images/pro_avatar.jpg`} alt="" />
+                                 <img style={{width : "300px", height : "270px"}} src={item.image ? `${import.meta.env.VITE_API_PATH}/product_images/${item.image}` : `${import.meta.env.VITE_API_PATH}/product_images/pro_avatar.jpg`} alt="" />
                               </div>
                               <div className="detail-box">
                                  <p style={{marginTop : 20, marginLeft : 20, fontSize : 19, fontWeight : "bold"}}>

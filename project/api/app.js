@@ -1,5 +1,5 @@
 import express from 'express';
-import { PORT } from './config/config.js';
+// import { PORT } from './config/config.js';
 import AllRoutes from './routes/AllRoutes.js'
 import pdf from 'pdf-creator-node'
 import fs from 'fs'
@@ -56,6 +56,7 @@ app.get("/demo", async(req, res)=>{
   });
 })
 
+let PORT = process.env.PORT;
 
 app.listen(PORT, ()=>{
     console.log("Server Running With Port ", PORT);

@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
-import { DB_URL } from "./config.js";
+// import { DB_URL } from "./config.js";
+
 mongoose
-.connect(DB_URL)
+.connect(process.env.DB_URL)
 .then(()=>{
     console.log("DB CONNECTED")
 })

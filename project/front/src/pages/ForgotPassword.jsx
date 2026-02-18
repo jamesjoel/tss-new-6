@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {useFormik} from 'formik'
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
-import { API_URL } from '../config/API'
+
 const ForgotPassword = () => {
     let navigate = useNavigate();
     let [errMsg, setErrMsg] = useState("");
@@ -13,7 +13,7 @@ const ForgotPassword = () => {
         },
         onSubmit : (formData)=>{
             axios
-            .post(`${API_URL}/forgotpassword/checkemail`, formData)
+            .post(`${import.meta.env.VITE_API_URL}/forgotpassword/checkemail`, formData)
             .then(response=>{
                 
                 if(response.data.success==true){

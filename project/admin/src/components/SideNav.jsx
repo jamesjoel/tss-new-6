@@ -121,6 +121,35 @@ const SideNav = () => {
               </ul>
             </div>
           </li>
+          <li className="nav-item">
+            <a className="nav-link" data-toggle="collapse" href="#order" aria-expanded="false" aria-controls="ui-basic">
+              
+              <span class="mdi mdi-cart-arrow-down menu-icon"></span>
+               &nbsp;&nbsp;&nbsp;&nbsp;<span className="menu-title">Orders</span>
+              <i className="menu-arrow"></i>
+            </a>
+            <div className="collapse" id="order">
+              <ul className="nav flex-column sub-menu">
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/order/list">All Orders</NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/order/placed">Placed</NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/order/shipped">Shipped</NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/order/outfor">Out For Develivery</NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/order/delivered">Delivered</NavLink>
+                </li>
+                
+                
+              </ul>
+            </div>
+          </li>
           
           <li className="nav-item">
             <NavLink className="nav-link" to="/logout">

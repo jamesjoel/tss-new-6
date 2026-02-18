@@ -9,7 +9,7 @@ const BuyNow = () => {
      let [pro, setPro] = useState({});
   useEffect(()=>{
     axios
-    .get(`${API_URL}/profile`, { headers : {Authorization : localStorage.getItem("access_user")}})
+    .get(`${import.meta.env.VITE_API_URL}/profile`, { headers : {Authorization : localStorage.getItem("access_user")}})
     .then(response=>{
     //   console.log(response.data.result);
       setUser(response.data.result);
@@ -17,7 +17,7 @@ const BuyNow = () => {
   },[])
   useEffect(()=>{
         axios
-        .get(`${API_URL}/product/${param.id}`)
+        .get(`${import.meta.env.VITE_API_URL}/product/${param.id}`)
         .then(response=>{
             console.log(response.data.result)
             setPro(response.data.result);
@@ -27,7 +27,7 @@ const BuyNow = () => {
     let makePayment = (p)=>{
         
         axios
-        .post(`${API_URL}/order/payment`, {amount : p}, { headers : {Authorization : localStorage.getItem("access_user")}})
+        .post(`${import.meta.env.VITE_API_URL}/order/payment`, {amount : p}, { headers : {Authorization : localStorage.getItem("access_user")}})
         .then(response=>{
             if(response.data.success==true){
         let option = {
@@ -52,7 +52,7 @@ const BuyNow = () => {
 
             }
             // console.log(paymentObj)
-            axios.post(`${API_URL}/order/confirm`, paymentObj, { headers : {Authorization : localStorage.getItem("access_user")}})
+            axios.post(`${import.meta.env.VITE_API_URL}/order/confirm`, paymentObj, { headers : {Authorization : localStorage.getItem("access_user")}})
             .then(response=>{
                 navigate("/myorders")
             })

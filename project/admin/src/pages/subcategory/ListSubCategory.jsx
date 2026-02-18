@@ -13,7 +13,7 @@ const ListSubCategory = () => {
 
     useEffect(()=>{
         axios
-        .get(`${API_URL}/subcategory`)
+        .get(`${import.meta.env.VITE_API_URL}/subcategory`)
         .then(response=>{
             setAllSubCate(response.data.result)
         })
@@ -27,7 +27,7 @@ const ListSubCategory = () => {
     let confDelete = ()=>{
         setPreLoader(true)
         axios
-        .delete(`${API_URL}/subcategory/${subCate._id}`)
+        .delete(`${import.meta.env.VITE_API_URL}/subcategory/${subCate._id}`)
         .then(response=>{
             setPreLoader(false);
             setShow(false);
