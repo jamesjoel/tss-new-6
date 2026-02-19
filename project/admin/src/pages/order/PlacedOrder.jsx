@@ -9,17 +9,17 @@ const PlacedOrder = () => {
         axios
         .get(`${import.meta.env.VITE_API_URL}/order/getallpalced`, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
         .then(response=>{
-            console.log(response.data)
+            // console.log(response.data)
             setAllOrder(response.data.result);
         })
     },[])
 
 
-    let changeStatus = (item)=>{
+    let changeStatus = (order)=>{
       axios
-      .put(`${import.meta.env.VITE_API_URL}/order/changestatus/${item._id}`, {status:2}, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
+      .put(`${import.meta.env.VITE_API_URL}/order/changestatus/${order._id}`, {status:2}, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
       .then(response=>{
-        console.log(response.data)
+        setAllOrder(prev=>prev.filter(item=>item._id != order._id))
       })
     }
 
@@ -51,7 +51,7 @@ const PlacedOrder = () => {
                                         <td>{item.user_id ? item.user_id.name : ''}</td>
                                         <td>{item.product_id ? item.product_id.title : ''}</td>
                                         <td>{item.createdAt}</td>
-                                        <td>{item.status == 1 ? "Placed" : item.status==2 ? "Shipeed" : item.status==3 ? "Out Of Delivery" : 'Delivered'}</td>
+                                        <td><span className='badge rounded-pill placed'>Placed</span></td>
                                         <td>{item.amount}</td>
                                         <td>{item.charge}</td>
                                         <td><button onClick={()=>changeStatus(item)} className='btn btn-sm btn-primary'>Shipped</button> </td>
