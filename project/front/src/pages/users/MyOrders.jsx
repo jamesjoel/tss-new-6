@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import {API_URL} from '../../config/API'
+import useDateView from '../../hooks/useDateView';
+
 
 const MyOrders = () => {
 
@@ -9,7 +10,7 @@ const MyOrders = () => {
     axios
     .get(`${import.meta.env.VITE_API_URL}/order/getall`, { headers : {Authorization : localStorage.getItem("access_user")}})
     .then(response=>{
-      console.log(response.data)
+      // console.log(response.data)
       setAllOrder(response.data.result)
     })
   },[])
@@ -43,7 +44,7 @@ const MyOrders = () => {
                           <td>{item.amount}</td>
                           <td>{item.payment_mode == 1 ? 'Online' : 'COD'}</td>
                           <td>{item.status == 1 ? 'Ordered' : item.status==2 ? 'Shipped' : item.status==3 ? 'Out of Develiery' : 'Delivered'}</td>
-                          <td>{item.updatedAt}</td>
+                          <td>{useDateView(item.updatedAt)}</td>
                         </tr>)
                     }
                   </tbody>

@@ -18,9 +18,9 @@ const ProtactedRoutes = () => {
     axios
     .get(`${import.meta.env.VITE_API_URL}/profile/profilepic`, { headers : {Authorization : localStorage.getItem("access_user")}})
     .then(response=>{
-      // console.log(response.data.result);
+      console.log(response.data.result);
       setUser(response.data.result);
-      let name = response.data.result.image == "" ? import.meta.env.VITE_API_PATH+"/user_images/avatar.jpg" : API_PATH+"/user_images/"+response.data.result.image;
+      let name = response.data.result.image == "" ? import.meta.env.VITE_API_PATH+"/user_images/avatar.jpg" : import.meta.env.VITE_API_PATH+"/user_images/"+response.data.result.image;
       setPic(name)
     })
   },[])
