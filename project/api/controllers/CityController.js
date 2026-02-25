@@ -13,6 +13,7 @@ let rzpy = new Razorpay({
 
 
 let GetAllCity = async(req, res)=>{
+    console.log("************")
     let result = await City.find();
     res.send(result);
 }

@@ -27,7 +27,7 @@ export default Order;
 
 /*
 status : 
-    1 --- ordered
+    1 --- placed
     2 --- shipped
     3 --- out of deliery
     4  -- delivered
