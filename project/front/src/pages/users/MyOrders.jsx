@@ -34,6 +34,7 @@ const MyOrders = () => {
                       <th>Payment Mode</th>
                       <th>Status</th>
                       <th>Date</th>
+                      <th>Download</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -45,6 +46,7 @@ const MyOrders = () => {
                           <td>{item.payment_mode == 1 ? 'Online' : 'COD'}</td>
                           <td>{item.status == 1 ? 'Ordered' : item.status==2 ? 'Shipped' : item.status==3 ? 'Out of Develiery' : 'Delivered'}</td>
                           <td>{useDateView(item.updatedAt)}</td>
+                          <td><a download href={`${import.meta.env.VITE_API_PATH}/invoices/${item.razorpay_order_id}_invoice.pdf`} className='btn btn-dark btn-sm'><i class="fa fa-download" aria-hidden="true"></i></a></td>
                         </tr>)
                     }
                   </tbody>

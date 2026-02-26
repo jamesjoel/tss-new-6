@@ -5,8 +5,12 @@ import ProductBox from '../components/ProductBox';
 import axios from 'axios'
 import Slider from '../components/Slider'
 import WhyShopWithUs from '../components/WhyShopWithUs'
+import { NavLink } from 'react-router-dom';
 const AllProducts = () => {
     let [product, setProduct] = useState([]);
+    let [showLoading, setShowLoading] = useState(false);
+    let [allCate, setAllCate] = useState([])
+
 
    useEffect(()=>{
       axios
@@ -16,7 +20,43 @@ const AllProducts = () => {
             setProduct(response.data.result);
          })
    },[])
+
+   useEffect(() => {
+      
+      axios
+         .get(import.meta.env.VITE_API_URL + "/category/subcate")
+         .then(response => {
+            // console.log(response.data.result)
+            setAllCate(response.data.result);
+         })
+   }, [])
+
+
+
+   let getProductByColor = (color)=>{
+        axios
+         .get(`${import.meta.env.VITE_API_URL}/filter`)
+         .then(response => {
+            // console.log(response.data);
+            setProduct(response.data.result);
+         })
+    
+   }
+
+
+
+
   return (
+    <>
+    {
+        showLoading
+        ?
+    <div className='overlay'>
+        <img src='/images/loading.gif' />
+    </div>
+    :
+    ''
+    }
     <section className="product_section layout_padding">
     <div className="container my-5" style={{minHeight : "600px"}}>
         <div className="row">
@@ -27,17 +67,43 @@ const AllProducts = () => {
                     </div>
                     <div className="card-body">
                         <h5 className='text-light'>Categories</h5>
-                        <ul className='nav'>
-                            <li className="nav-item">
-                                <a href='' className='nav-link text-light'>Formal Shoes</a>
+                        {/* <ul className='nav'>
+                            <li className='nav-item'>
+                                <button data-toggle="collapse" data-target="#id1" className='btn text-light'>Home Appliance</button>
+                                <div className='collapse' id='id1'>
+                                    <ul className='nav flex-column bg-dark'>
+                                        <li className='nav-item'>
+                                            <NavLink to="" className="nav-link">Sofa-Set</NavLink>
+                                        </li>
+                                        <li className='nav-item'>
+                                            <NavLink to="" className="nav-link">Sofa-Set</NavLink>
+                                        </li>
+                                        <li className='nav-item'>
+                                            <NavLink to="" className="nav-link">Sofa-Set</NavLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                                    
+                                
                             </li>
-                            <li className="nav-item">
-                                <a href='' className='nav-link text-light'>Formal Shoes</a>
+                            <li className='nav-item'>
+                                <button data-toggle="collapse" data-target="#id2" className='nav-link btn text-light'>Mobile</button>
+                                <div className='collapse' id='id2'>
+                                    <ul className='nav flex-column bg-dark'>
+                                        <li className='nav-item'>
+                                            <NavLink to="" className="nav-link">Sofa-Set</NavLink>
+                                        </li>
+                                        <li className='nav-item'>
+                                            <NavLink to="" className="nav-link">Sofa-Set</NavLink>
+                                        </li>
+                                        <li className='nav-item'>
+                                            <NavLink to="" className="nav-link">Sofa-Set</NavLink>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
-                            <li className="nav-item">
-                                <a href='' className='nav-link text-light'>Formal Shoes</a>
-                            </li>
-                        </ul>
+                            
+                        </ul> */}
                         <div className='saperator'></div>
                         <br />
                         <h5 className='text-light'>Price</h5>
@@ -45,13 +111,13 @@ const AllProducts = () => {
                         <div className='saperator'></div>
                         <br />
                         <h5 className='text-light'>Color</h5>
-                        <span className='color red'></span>
-                        <span className='color black'></span>
-                        <span className='color white'></span>
-                        <span className='color yellow'></span>
-                        <span className='color blue'></span>
-                        <span className='color brown'></span>
-                        <span className='color green'></span>
+                        <span onClick={()=>getProductByColor('red')} className='color red'></span>
+                        <span onClick={()=>getProductByColor('black')} className='color black'></span>
+                        <span onClick={()=>getProductByColor('white')} className='color white'></span>
+                        <span onClick={()=>getProductByColor('yellow')} className='color yellow'></span>
+                        <span onClick={()=>getProductByColor('blue')} className='color blue'></span>
+                        <span onClick={()=>getProductByColor('brown')} className='color brown'></span>
+                        <span onClick={()=>getProductByColor('green')} className='color green'></span>
                         <br />
                         <div className='saperator'></div>
                         <br />
@@ -88,7 +154,7 @@ const AllProducts = () => {
                     {
                      product.map(item => {
                         return(
-                           <ProductBox item={item} />
+                           <ProductBox key={item._id} item={item} />
                         )
                      })
                   }
@@ -97,7 +163,23 @@ const AllProducts = () => {
         </div>
     </div>
     </section>
+    </>
   )
 }
 
 export default AllProducts
+
+
+/*
+{
+                                allCate.map((item, index)=>{
+                                    return(
+
+                                        <li key={index} className="nav-item">
+                                            <NavLink className='nav-link text-light'>{item.category ? item.category.name : ''} &nbsp;&nbsp; <i class="fa fa-caret-right" aria-hidden="true"></i></NavLink>
+                                        </li>
+                                    )
+                                })
+                            }
+
+*/

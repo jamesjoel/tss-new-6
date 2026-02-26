@@ -13,7 +13,7 @@ const Header = () => {
    let [allCate, setAllCate] = useState([])
 
    useEffect(() => {
-      console.log(import.meta.env.VITE_API_URL)
+      
       axios
 
          .get(import.meta.env.VITE_API_URL + "/category/subcate")
@@ -49,20 +49,20 @@ const Header = () => {
                         </a>
                         <ul className="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                            {
-                              allCate.map(item1=>{
+                              allCate.map((item1, index)=>{
                                  return(
-                                    <li className="dropdown-submenu">
+                                    <li key={index} className="dropdown-submenu">
                               <a className="dropdown-item" href="#">{item1.category ? item1.category.name : ''}</a>
                               <ul className="dropdown-menu">
                                  {
-                                    item1.info.map(item2=>{
+                                    item1.info.map((item2, index2)=>{
                                        return(
-                                          <li className="dropdown-item"><a href="#">{item2.name}</a></li>
+                                          <li key={index2} className="dropdown-item"><a href="#">{item2.name}</a></li>
                                        )
                                     })
                                  }                                 
                               </ul>
-                           </li>
+                                    </li>
                                  )
                               })
                            }
