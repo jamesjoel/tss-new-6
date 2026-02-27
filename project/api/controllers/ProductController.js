@@ -27,6 +27,7 @@ let GetAllProduct = async(req, res)=>{
 
 
 
+
 let GetAllProductById = async(req, res)=>{
     let id = req.params.id;
     let result = await Pro.find({_id : id }).populate("categoryId").populate("subcategoryId").exec();

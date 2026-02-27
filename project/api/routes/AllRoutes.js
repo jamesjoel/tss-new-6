@@ -12,12 +12,17 @@ import AdminRoutes from './AdminRoutes.js'
 import IsAdminLoggedIn from '../util/IsAdminLoggedIn.js'
 import ForgotPasswordRoutes from './ForgotPasswordRoutes.js'
 import OrderRoutes from './OrderRoutes.js'
+import FilterRoutes from './ProductFilterRoutes.js'
 
 
 let routes = express.Router();
 
 routes.use("/api/v1/city", CityRoutes);
 routes.use("/api/v1/user", UserRoutes);
+routes.use("/api/v1/filter", FilterRoutes);
+
+
+
 routes.use("/api/v1/category", CategoryRoutes);
 routes.use("/api/v1/subcategory", SubCategoryRoutes);
 routes.use("/api/v1/auth", UserAuthRoutes);
