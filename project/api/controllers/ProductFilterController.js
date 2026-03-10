@@ -1,18 +1,33 @@
 //   http://localhost:3000/api/v1/filter?color=Red
 import Product from '../models/Product.js'
 let GetAllProduct = async(req, res)=>{
-    
+    // console.log(req.query);
     let where = {};
     if(Object.keys(req.query).length == 0){ // if query string is empty
         where = {};
     }
     if(req.query.color){
         where.color = req.query.color;
+        // {color : "red"}
     }
     if(req.query.discount){
         where.discount = {$gte : req.query.discount};
 
     }
+    if(req.query.size){
+        where.size = req.query.size;
+    } // { color : "red", size : "M"}
+    if(req.query.min && req.query.max){
+        let temp = {...where};
+        where = {$and : [{price : {$gte : req.query.min}}, {price : {$lte : req.query.max}}, temp]};
+        
+    }
+
+    
+    // find({age : {$gte : 25}})
+    // find({ $and : [{ price : {$gte : 1700 }}, {price : {$lte : 3500 }}, {color : "red", discount : 10, size : 'M'}]})
+    
+    
     
     let result = await Product.find(where).populate("categoryId").populate("subcategoryId").exec();
     res.send({success:true, result : result});
@@ -22,9 +37,21 @@ let GetAllProduct = async(req, res)=>{
 export {GetAllProduct}
 
 /*
-   http://localhost:3000/api/v1/filter
-   http://localhost:3000/api/v1/filter?color=Red
-   http://localhost:3000/api/v1/filter?discount=10
-   http://localhost:3000/api/v1/filter?discount=10&color=Red
+  
+
+
+let arr = ["red", "green", "blue"];
+let x = true;
+if(!x){
+
+let temp = [...arr];
+arr = { data : temp }
+
+
+}
+
+console.log(arr);
+if ---- > true ---- > ["red", "green", "blue"]
+else ---- > false ---- > { data : ["red", "green", "blue"]}
 
 */

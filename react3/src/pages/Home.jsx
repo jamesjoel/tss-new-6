@@ -1,11 +1,18 @@
+import axios from 'axios';
 import {useState} from 'react'
+
+const API_KEY = "145288AFertgsdgser21sd2fg15e1rg";
 
 let Home = ()=>{
     // let name = "rohit sharma";
     let [name, setName] = useState("rohit");
 
     let demo = ()=>{
-        setName("amar");
+        axios
+        .get("http://localhost:3000/api/v1/paid/"+API_KEY)
+        .then(response=>{
+            console.log(response.data)
+        })
     }
     let demo2 = ()=>{
         setName("vijay")
