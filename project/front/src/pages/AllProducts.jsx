@@ -51,24 +51,32 @@ const AllProducts = () => {
 
     let getProductByColor = (value) => {
         let obj = { color: value }
-        getFilteredProductNew(obj)
+        updateFilteredUrl(obj)
     }
     let getProductBySize = (value) => {
         let obj = { size: value }
-        getFilteredProductNew(obj)
+        updateFilteredUrl(obj)
 
     }
     let getProductByDiscount = (value) => {
         let obj = { discount: value }
-        getFilteredProductNew(obj)
+        updateFilteredUrl(obj)
 
     }
     let getProductByPrice = () => {
         let obj = { min: price[0], max: price[1] };
-        getFilteredProductNew(obj);
+        updateFilteredUrl(obj);
+    }
+    let getProductByCategory = (title)=>{
+        let obj = { category : title }
+        updateFilteredUrl(obj);
+    }
+    let getProductBySubCategory=(cate, subcate)=>{
+        let obj = {category : cate, subcategory : subcate}
+        updateFilteredUrl(obj);
     }
 
-    let getFilteredProductNew = (obj) => {
+    let updateFilteredUrl = (obj) => {
         let currUrlObj = Object.fromEntries(searchParam.entries())
         let newUrlObj = { ...currUrlObj, ...obj };
         setSearchParam(newUrlObj)
@@ -76,6 +84,7 @@ const AllProducts = () => {
 
 
     }
+
 
 
 
@@ -103,33 +112,30 @@ const AllProducts = () => {
                                 </div>
                                 <div className="card-body">
                                     <h5 className='text-light'>Categories</h5>
-                                    {/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */}
+                                    
                                     <div class="accordion" id="accordionExample">
                                         {
                                             allCate.map((item, index)=>{
 
                                                 return(
-                                                    <div class="card">
-                                                    <div class="card-header" id="headingOne">
+                                                    <div class="card border-0">
+                                                    <div class="card-header bg-dark m-0 p-0" id="headingOne">
                                                         <h5 class="mb-0">
-                                                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target={"#collapse"+index} aria-expanded="true" aria-controls="collapseOne">
-                                                                {item.category ? item.category.name : ''}
+                                                            <button onClick={()=>getProductByCategory(item.category.name)} class="btn btn-link text-light m-0 py-1 px-4" type="button" data-toggle="collapse" data-target={"#collapse"+index} aria-expanded="true" aria-controls="collapseOne">
+                                                                {item.category ? item.category.name : ''}&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
                                                             </button>
                                                         </h5>
                                                     </div>
 
                                                     <div id={"collapse"+index} class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                                        <div class="card-body">
+                                                        <div class="card-body bg-dark">
                                                             {
                                                                item.info && item.info.map((item2, index2)=>{
                                                                 return(
-                                                                       <p>{item2.name}</p> 
+                                                                       <button onClick={()=>getProductBySubCategory(item.category.name, item2.name)} style={{fontSize : 14}} className='btn btn-link text-light'>{item2.name}</button> 
                                                                 )
                                                                })
                                                             }
-                                                            
-                                                            
-                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -139,49 +145,6 @@ const AllProducts = () => {
                                         
 
                                     </div>
-
-
-
-                                    {/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */}
-
-
-                                    {/* <ul className='nav'>
-                            <li className='nav-item'>
-                                <button data-toggle="collapse" data-target="#id1" className='btn text-light'>Home Appliance</button>
-                                <div className='collapse' id='id1'>
-                                    <ul className='nav flex-column bg-dark'>
-                                        <li className='nav-item'>
-                                            <NavLink to="" className="nav-link">Sofa-Set</NavLink>
-                                        </li>
-                                        <li className='nav-item'>
-                                            <NavLink to="" className="nav-link">Sofa-Set</NavLink>
-                                        </li>
-                                        <li className='nav-item'>
-                                            <NavLink to="" className="nav-link">Sofa-Set</NavLink>
-                                        </li>
-                                    </ul>
-                                </div>
-                                    
-                                
-                            </li>
-                            <li className='nav-item'>
-                                <button data-toggle="collapse" data-target="#id2" className='nav-link btn text-light'>Mobile</button>
-                                <div className='collapse' id='id2'>
-                                    <ul className='nav flex-column bg-dark'>
-                                        <li className='nav-item'>
-                                            <NavLink to="" className="nav-link">Sofa-Set</NavLink>
-                                        </li>
-                                        <li className='nav-item'>
-                                            <NavLink to="" className="nav-link">Sofa-Set</NavLink>
-                                        </li>
-                                        <li className='nav-item'>
-                                            <NavLink to="" className="nav-link">Sofa-Set</NavLink>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            
-                        </ul> */}
                                     <div className='saperator'></div>
                                     <br />
                                     <h5 className='text-light'>Price</h5>
@@ -257,57 +220,19 @@ export default AllProducts
 
 
 /*
-    /product?color=red&discount=10
+    :3000/api/v1/filter  ----- all pro
+    :3000/api/v1/filter?color=red  ----- all pro
+    :3000/api/v1/filter?size=M  ----- all pro
+    :3000/api/v1/filter?discount=20  ----- all pro
+    :3000/api/v1/filter?min=200&max=1500  ----- all pro
+    :3000/api/v1/filter?category=Formal Shoes  ----- all pro
+    :3000/api/v1/filter?category=Formal Shoes&subcategory=Leather Shoes  ----- all pro
 
-    let x = Object.fromEntries(searchParam.entries())
-
-    { color : "red", discount : 10 }
-
-    {size : L}
-
-    {...x, a}
-
-    { color : "red", discount : 10, size : L }
-
-
-
-
-
-
-    URL ---  data inject
-            1.      /product/sony/mobile
-                    /primary/info1/info2
-
-            Parametrized Routes
-                Node                        React
-                /product/:a/:b              /product/:a/:b
-                req.params                  usePamars
-
-
-            2. Query String
-                    /product?title=Sony&categroy=Mobile
-                    /product?key=value&key=value
-
-               Node                         React
-               /product                     /prodcut
-               req.query                    useSearchParams
-
-
-
-
-
-
-
-        /user?name=rohit&age=25
-
-        let [searchParam, setSearchParam] = useSearchParam();
-        let a = searchParam.get("name")       
-        let b = searchParam.get("age")   
-        
-        setSearchParam.set("city", "indore")
-        /user?name=rohit&age=25&city=indore
-                    
-            
-        
+    :3000/api/v1/filter?size=M&color=red  ----- all pro
+    :3000/api/v1/filter?size=M&color=red&discount=20  ----- all pro
+    :3000/api/v1/filter?size=M&color=red&discount=20  ----- all pro
+    
+    
+    :3000/api/v1/filter?size=M&color=red&discount=20&min=200&max=1500&category=Formal Shoes&subcategory=Leather Shoes  ----- all pro
         
 */

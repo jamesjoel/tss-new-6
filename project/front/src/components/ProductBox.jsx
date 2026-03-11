@@ -21,7 +21,7 @@ const ProductBox = ({item}) => {
                               </div>
                               <div className="detail-box">
                                  <p style={{marginTop : 20, marginLeft : 20, fontSize : 19, fontWeight : "bold"}}>
-                                    {item.title}
+                                    {item.title} {item.price}
                                  </p>
                                  
                               </div>
