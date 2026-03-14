@@ -3,7 +3,7 @@ import Product from '../models/Product.js'
 import Category from '../models/Category.js'
 import SubCate from '../models/SubCategory.js'
 let GetAllProduct = async(req, res)=>{
-    // console.log(req.query);
+    
     let where = {};
     if(Object.keys(req.query).length == 0){ // if query string is empty
         where = {};
@@ -34,6 +34,10 @@ let GetAllProduct = async(req, res)=>{
         where.subcategoryId = result_subcate[0]._id;
 
     }
+    if(req.query.brand){
+        where.brand = req.query.brand;
+    }
+
     if(req.query.min && req.query.max){
         let temp = {...where};
         where = {$and : [{price : {$gte : req.query.min}}, {price : {$lte : req.query.max}}, temp]};

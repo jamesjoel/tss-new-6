@@ -52,7 +52,7 @@ const ListProducts = () => {
     x.append("photo", myfile);
     axios.put(`${import.meta.env.VITE_API_URL}/product/uploadimage/${proId}`, x, {headers : {Authorization : localStorage.getItem("sseccanimda")} })
     .then(response=>{
-      // console.log(response.data);
+      console.log(response.data);
       setShowOverLay("none")
     })
     
@@ -68,8 +68,9 @@ const ListProducts = () => {
   let confDelete = ()=>{
     setPreLoader(true);
     axios
-    .delete(`${import.meta.env.VITE_API_URL}/product/${pro._id}`)
+    .delete(`${import.meta.env.VITE_API_URL}/product/${pro._id}`, {headers : {Authorization : localStorage.getItem("sseccanimda")} })
     .then(response=>{
+      console.log(response.data)
       setPreLoader(false);
       setAllPro(curr=>curr.filter(item=>item._id != pro._id));
       setShow(false);

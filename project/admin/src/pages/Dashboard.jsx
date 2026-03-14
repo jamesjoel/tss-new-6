@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Dashboard = () => {
+  let [a, setA] = useState("")
+  let handleChange = (e)=>{
+    let v = e.target.value;
+    // isNaN() --- is not a number
+    if(isNaN(v)==true){
+      // setA(v)
+    }else{
+      return;
+    }
+    
+  }
   return (
     <>
     <div className="main-panel">
           <div className="content-wrapper pb-0">
             <div className="page-header flex-wrap">
+              <input value={a} onChange={(e)=>handleChange(e)} type='text' />
+              <br />
+              <br />
+              <br />
               <h3 className="mb-0"> Hi, welcome back! <span className="pl-0 h6 pl-sm-2 text-muted d-inline-block">Your web analytics dashboard template.</span>
               </h3>
               <div className="d-flex">

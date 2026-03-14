@@ -5,10 +5,12 @@ import {API_URL} from '../../config/API'
 import {useNavigate, useParams} from 'react-router-dom'
 
 const AddProducts = () => {
+  let [showOtherInput, setShowOtherInput] = useState(false)
   let param = useParams();
   let navigate = useNavigate();
   let [allCate, setAllCate] = useState([])
   let [allSubCate, setAllSubCate] = useState([]);
+  let [other, setOther] = useState("")
   let [pro, setPro] = useState({
         title : "",
         price : "",
@@ -51,6 +53,11 @@ const AddProducts = () => {
     enableReinitialize : true,
     initialValues : pro,
     onSubmit : (formData)=>{
+
+      if(formData.brand=="Other"){
+        formData.brand = other;
+      }
+      
      if(param.id){
       axios
        .put(`${import.meta.env.VITE_API_URL}/product/${param.id}`, formData, {headers : {Authorization : localStorage.getItem("sseccanimda")}})
@@ -78,6 +85,14 @@ const AddProducts = () => {
     })
   }
 
+  let handleBrand = (e)=>{
+      if(e.target.value=="Other"){
+      setShowOtherInput(true)
+    }else{
+      setShowOtherInput(false)
+    }
+  }
+
 
   return (
     <div className="main-panel">
@@ -98,9 +113,14 @@ const AddProducts = () => {
                         <label htmlFor="">Product Cost Price</label>
                         <input value={ProFrm.values.costprice} name='costprice' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
                       </div>
+
                       <div className="my-4">
                         <label htmlFor="">Product Selling Price (M.R.P.)</label>
                         <input value={ProFrm.values.price} name='price' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
+                      </div>
+                      <div className="my-4">
+                        <label htmlFor="">Discount(%)</label>
+                        <input value={ProFrm.values.discount} name='discount' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
                       </div>
                       <div className="my-4">
                         <label htmlFor="">Category</label>
@@ -121,8 +141,29 @@ const AddProducts = () => {
                         </select>
                       </div>
                       <div className="my-4">
-                        <label htmlFor="">Brand/Company</label>
-                        <input value={ProFrm.values.brand} name='brand' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
+                        <label>Brand/Company</label>
+                        {/* <input value={ProFrm.values.brand} name='brand' onChange={ProFrm.handleChange} type='text' className={'form-control'} /> */}
+                        <select className={'form-control'} name='brand' value={ProFrm.values.brand} onChange={(e)=>{handleBrand(e); ProFrm.handleChange(e)}}>
+                          <option value="">Select</option>
+                          <option value="Addidas">Addidas</option>
+                          <option value="Nike">Nike</option>
+                          <option value="Red Tape">Red Tape</option>
+                          <option value="Campus">Campus</option>
+                          <option value="Action">Action</option>
+                          <option value="Bata">Bata</option>
+                          <option value="Woodland">Woodland</option>
+                          <option value="Other">Other</option>
+                        </select>
+                        <br />
+                        {
+                          showOtherInput
+                          ?
+                        <div>
+                          <input value={other} onChange={(e)=>setOther(e.target.value)} type='text' placeholder='Type Your Barnd Name' className='form-control'/>
+                        </div>
+                        :
+                        ''
+                        }
                       </div>
                       <div className="my-4">
                         <label htmlFor="">Size</label>
@@ -153,10 +194,7 @@ const AddProducts = () => {
                         <label htmlFor="">Quantity</label>
                         <input value={ProFrm.values.quantity} name='quantity' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
                       </div>
-                      <div className="my-4">
-                        <label htmlFor="">Discount(%)</label>
-                        <input value={ProFrm.values.discount} name='discount' onChange={ProFrm.handleChange} type='text' className={'form-control'} />
-                      </div>
+                      
                       <div className="my-4">
                         <label htmlFor="">Detail</label>
                         <textarea value={ProFrm.values.detail} name='detail' onChange={ProFrm.handleChange} className={'form-control'} ></textarea>
@@ -178,16 +216,10 @@ const AddProducts = () => {
 export default AddProducts
 
 /*
-   title : String,
-    price : Number,
-    categoryId : { type :  mongoose.Schema.Types.ObjectId, ref : "category"},
-    subcategoryId : {type : mongoose.Schema.Types.ObjectId, ref : "subcategory"},
-    brand : String,
-    quantity : Number,
-    costprice : Number,
-    discount : Number,
-    color : String,
-    size : String,
-    detail : String
+   
+  let obj = {name : "rohit", age : 25, city : "indore"};
+
+  obj = {...obj, age : 30}
+
 */
 

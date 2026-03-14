@@ -13,9 +13,27 @@ const Header = () => {
                     <li className='nav-item'>
                         <NavLink to="/" className="nav-link">Home</NavLink>
                     </li>
-                    <li className='nav-item'>
-                        <NavLink to="/student" className="nav-link">Student</NavLink>
+                    {
+                        localStorage.getItem("token")
+                        ?
+                        <>
+                        <li className='nav-item'>
+                        <NavLink to="/profile" className="nav-link">Profile</NavLink>
                     </li>
+                    <li className='nav-item'>
+                        <NavLink to="/logout" className="nav-link">Logout</NavLink>
+                    </li>
+                    </>
+                    :
+                    <li className='nav-item'>
+                        <NavLink to="/login" className="nav-link">Login</NavLink>
+                    </li>
+
+                    }
+                    
+                    {/* <li className='nav-item'>
+                        <NavLink to="/student" className="nav-link">Student</NavLink>
+                    </li> */}
                 </ul>
             </div>
         </div>

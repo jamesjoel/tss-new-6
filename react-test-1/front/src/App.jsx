@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from './components/Header'
-import { Outlet, Route, Routes } from 'react-router-dom'
+import { Outlet, Route, Routes, useNavigate } from 'react-router-dom'
 import Home from './pages/Home'
 import Student from './pages/Student'
 import AddStudent from './pages/AddStudent'
+import Login from './pages/Login'
+import Logout from './pages/Logout'
+import Profile from './pages/Profile'
 
 const App = () => {
   return (
@@ -11,6 +14,15 @@ const App = () => {
     <Header />
     <Routes>
       <Route path='/' element={<Home />} />
+      <Route path='/login' element={<Login />} />
+
+      <Route path='' element={<ProtactedRoute />}>
+        <Route path='/logout' element={<Logout />} />
+        <Route path='/profile' element={<Profile />} />
+      </Route>
+
+
+
       <Route path='' element={<Layout />}>
         <Route path='/student' element={<Student />} />
         <Route path='/student/add' element={<AddStudent />} />
@@ -22,6 +34,18 @@ const App = () => {
 }
 
 export default App
+
+let ProtactedRoute = ()=>{
+  let navigate = useNavigate();
+  useEffect(()=>{
+    if(! localStorage.getItem("token")){
+      navigate("/login")
+    }
+  },[])
+  return(
+    <Outlet />
+  )
+}
 
 
 let Layout = ()=>{

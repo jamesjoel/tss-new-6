@@ -16,6 +16,8 @@ const AllProducts = () => {
     let [showLoading, setShowLoading] = useState(false);
     let [allCate, setAllCate] = useState([])
 
+    let [filteredLable, setFilteredLable] = useState([]);
+
     useEffect(() => {
         let currUrlObj = Object.fromEntries(searchParam.entries())
         if (currUrlObj.min && currUrlObj.max) {
@@ -39,6 +41,15 @@ const AllProducts = () => {
     let getFilteredProduct = (obj = {}) => {
         let currUrlObj = Object.fromEntries(searchParam.entries())
         let newUrlObj = { ...currUrlObj, ...obj };
+        // {color : red, size : M, min : 2000, max : 3000}
+        let arr = [];
+        for(let x in newUrlObj){
+            let a = <button className='btn btn-sm m-1 btn-secondary'>{newUrlObj[x]}<i className='fa fa-close'></i> </button>
+            arr.push(a)
+            
+        }
+        
+        setFilteredLable(arr);
         let query = new URLSearchParams(newUrlObj).toString();
         axios
             .get(`${import.meta.env.VITE_API_URL}/filter?${query}`)
@@ -67,6 +78,11 @@ const AllProducts = () => {
         let obj = { min: price[0], max: price[1] };
         updateFilteredUrl(obj);
     }
+    let getProductByBrand = (brand)=>{
+        let obj = {brand : brand}
+        updateFilteredUrl(obj);
+    }
+
     let getProductByCategory = (title)=>{
         let obj = { category : title }
         updateFilteredUrl(obj);
@@ -75,6 +91,8 @@ const AllProducts = () => {
         let obj = {category : cate, subcategory : subcate}
         updateFilteredUrl(obj);
     }
+
+
 
     let updateFilteredUrl = (obj) => {
         let currUrlObj = Object.fromEntries(searchParam.entries())
@@ -146,6 +164,19 @@ const AllProducts = () => {
 
                                     </div>
                                     <div className='saperator'></div>
+                                    <h5 className='text-light'>Brand</h5>
+                                    <div className='d-flex flex-column align-items-start'>
+                                    <button onClick={()=>getProductByBrand('Addidas')} className='btn btn-link text-light'>Addidas</button>
+                                    <button onClick={()=>getProductByBrand('Nike')} className='btn btn-link text-light'>Nike</button>
+                                    <button className='btn btn-link text-light' onClick={()=>getProductByBrand('Red Tape')}>Red Tape</button>
+                                    <button className='btn btn-link text-light' onClick={()=>getProductByBrand('Campus')}>Campus</button>
+                                    <button className='btn btn-link text-light' onClick={()=>getProductByBrand('Action')}>Action</button>
+                                    <button className='btn btn-link text-light' onClick={()=>getProductByBrand('Bata')}>Bata</button>
+                                    <button className='btn btn-link text-light' onClick={()=>getProductByBrand('Woodland')}>Woodland</button>
+                                    <button className='btn btn-link text-light' onClick={()=>getProductByBrand('Other')}>Other</button>
+                                    </div>
+
+                                    <div className='saperator'></div>
                                     <br />
                                     <h5 className='text-light'>Price</h5>
                                     <br />
@@ -199,6 +230,11 @@ const AllProducts = () => {
                         </div>
                         <div className="col-md-9">
                             <h3>All Products</h3>
+                            {
+                                filteredLable
+                            }
+                            
+                            
                             <div className="row">
                                 {
                                     product.map(item => {

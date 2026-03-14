@@ -9,6 +9,7 @@ let SaveProduct = async(req, res)=>{
         let obj = jwt.decode(token, process.env.ENC_KEY)
         if(obj){
             // console.log(req.body);return;
+            req.body.f_price = req.body.price - (req.body.price*req.body.discount/100)
             let result = await Pro.create(req.body);
             res.send({success: true, result});
         }else{
@@ -42,10 +43,12 @@ let GetAllProductByIdForEdit = async(req, res)=>{
 
 let UpdateProduct = async(req, res)=>{
     let id = req.params.id;
+    req.body.f_price = req.body.price - (req.body.price*req.body.discount/100)
     let result = await Pro.updateMany({_id : id }, req.body);
     res.send({success: true, result});
 }
 let DeleteProduct = async(req, res)=>{
+    console.log(req.params)
     let id = req.params.id;
     let result = await Pro.deleteMany({_id : id});
     res.send({success: true, result});

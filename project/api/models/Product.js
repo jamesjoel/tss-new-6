@@ -13,6 +13,7 @@ let ProSchema = mongoose.Schema({
     size : String,
     image : String,
     detail : String,
+    f_price : Number
 }, {timestamps : true})
 
 let Pro = mongoose.model("product", ProSchema);
