@@ -13,6 +13,9 @@ const Header = () => {
                     <li className='nav-item'>
                         <NavLink to="/" className="nav-link">Home</NavLink>
                     </li>
+                    <li className='nav-item'>
+                        <NavLink to="/product" className="nav-link">Product</NavLink>
+                    </li>
                     {
                         localStorage.getItem("token")
                         ?

@@ -38,17 +38,35 @@ const AllProducts = () => {
             })
     }, [])
 
+    let removeFilteredLable = (value)=>{
+        
+        let [...arr] = filteredLable;
+        let newarr = arr.filter(item=>item.lableName != value);
+        setFilteredLable(newarr);
+        let currUrlObj = Object.fromEntries(searchParam.entries())
+        console.log(currUrlObj)
+        let {[value]:temp, ...newUrlObj} = currUrlObj;
+        setSearchParam(newUrlObj)
+        getFilteredProduct();
+        
+        // setFilteredLable(curr=>curr.filter(item=> item.lableName != value));
+        // let {[value]:temp, ...newUrlObj} = currUrlObj;
+
+    }
+
     let getFilteredProduct = (obj = {}) => {
         let currUrlObj = Object.fromEntries(searchParam.entries())
         let newUrlObj = { ...currUrlObj, ...obj };
         // {color : red, size : M, min : 2000, max : 3000}
         let arr = [];
         for(let x in newUrlObj){
-            let a = <button className='btn btn-sm m-1 btn-secondary'>{newUrlObj[x]}<i className='fa fa-close'></i> </button>
+            // let a = <button onClick={()=>removeFilteredLable(newUrlObj[x])} className='btn btn-sm m-1 btn-secondary'>{newUrlObj[x]}<i className='fa fa-close'></i> </button>
+            let a ={ lableName : x, lableValue : newUrlObj[x] }
             arr.push(a)
+            // [{}, {}, {}]
             
         }
-        
+        console.log(arr)
         setFilteredLable(arr);
         let query = new URLSearchParams(newUrlObj).toString();
         axios
@@ -231,7 +249,7 @@ const AllProducts = () => {
                         <div className="col-md-9">
                             <h3>All Products</h3>
                             {
-                                filteredLable
+                                filteredLable.map(item=><button onClick={()=>removeFilteredLable(item.lableName)} className='btn btn-sm m-1 btn-secondary'>{item.lableName.toUpperCase()}-{item.lableValue}<i className='fa fa-close'></i> </button>)
                             }
                             
                             
@@ -256,19 +274,6 @@ export default AllProducts
 
 
 /*
-    :3000/api/v1/filter  ----- all pro
-    :3000/api/v1/filter?color=red  ----- all pro
-    :3000/api/v1/filter?size=M  ----- all pro
-    :3000/api/v1/filter?discount=20  ----- all pro
-    :3000/api/v1/filter?min=200&max=1500  ----- all pro
-    :3000/api/v1/filter?category=Formal Shoes  ----- all pro
-    :3000/api/v1/filter?category=Formal Shoes&subcategory=Leather Shoes  ----- all pro
-
-    :3000/api/v1/filter?size=M&color=red  ----- all pro
-    :3000/api/v1/filter?size=M&color=red&discount=20  ----- all pro
-    :3000/api/v1/filter?size=M&color=red&discount=20  ----- all pro
-    
-    
-    :3000/api/v1/filter?size=M&color=red&discount=20&min=200&max=1500&category=Formal Shoes&subcategory=Leather Shoes  ----- all pro
+    return a<1;
         
 */

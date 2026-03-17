@@ -7,6 +7,7 @@ import AddStudent from './pages/AddStudent'
 import Login from './pages/Login'
 import Logout from './pages/Logout'
 import Profile from './pages/Profile'
+import Product from './pages/Product'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/login' element={<Login />} />
+      <Route path='/product' element={<Product />} />
 
       <Route path='' element={<ProtactedRoute />}>
         <Route path='/logout' element={<Logout />} />
