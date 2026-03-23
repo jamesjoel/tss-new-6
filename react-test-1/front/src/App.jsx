@@ -8,6 +8,7 @@ import Login from './pages/Login'
 import Logout from './pages/Logout'
 import Profile from './pages/Profile'
 import Product from './pages/Product'
+import EMI from './pages/EMI'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
     <Header />
     <Routes>
       <Route path='/' element={<Home />} />
+      <Route path='/emi' element={<EMI />} />
       <Route path='/login' element={<Login />} />
       <Route path='/product' element={<Product />} />
 
