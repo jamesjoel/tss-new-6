@@ -12,6 +12,9 @@ const EMI = () => {
     let [int, setInt] = useState(0)
     let [total, setTotal] = useState(0)
 
+    let [perPri, setPerPri] = useState(0)
+    let [perInt, setPerInt] = useState(0)
+
     
 
     let getLoan = (e)=>{
@@ -45,6 +48,18 @@ const EMI = () => {
         setInt(int)
         setTotal(total)
         setEmi(emi)
+        let a = loan * 100 / total
+        let b = int * 100 / total
+        
+        setPerPri(a)
+        setPerInt(b)
+
+
+        // let a = 
+        /*
+
+        */
+
 
 
     }
@@ -144,11 +159,16 @@ const EMI = () => {
                                     <div className="col-md-8">
                                         <PieChart
                                             data={[
-                                                { title: 'One', value: 10, color: '#35c9f2' },
-                                                { title: 'Two', value: 15, color: '#1f61b8' },
+                                                { title: 'One', value: perInt, color: '#35c9f2' },
+                                                { title: 'Two', value: perPri, color: '#1f61b8' },
 
                                             ]}
                                         />
+                                        <br />
+                                        <span style={{backgroundColor : "#35c9f2", height : 30, width : 30, display : 'inline-block', margin : "0 10px" }}></span>
+                                        <b className='text-light'>Intrest</b>
+                                        <span style={{backgroundColor : "#1f61b8", height : 30, width : 30, display : 'inline-block', margin : "0 10px" }}></span>
+                                        <b className='text-light'>Principal</b>
                                     </div>
                                 </div>
                             </div>

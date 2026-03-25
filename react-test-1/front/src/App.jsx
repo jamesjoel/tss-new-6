@@ -9,6 +9,8 @@ import Logout from './pages/Logout'
 import Profile from './pages/Profile'
 import Product from './pages/Product'
 import EMI from './pages/EMI'
+import TikTakTok from './pages/TikTakTok'
+import SnakeLadder from './pages/SnakeLadder'
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/emi' element={<EMI />} />
+      <Route path='/snake' element={<SnakeLadder />} />
+      <Route path='/tik' element={<TikTakTok />} />
       <Route path='/login' element={<Login />} />
       <Route path='/product' element={<Product />} />
 

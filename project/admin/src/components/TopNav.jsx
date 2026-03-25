@@ -5,10 +5,8 @@ const TopNav = () => {
   return (
     <nav className="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row">
           <div className="navbar-menu-wrapper d-flex align-items-stretch justify-content-between">
-            <a className="navbar-brand brand-logo-mini align-self-center d-lg-none" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
-            <button className="navbar-toggler navbar-toggler align-self-center mr-2" type="button" data-toggle="minimize">
-              <i className="mdi mdi-menu"></i>
-            </button>
+            
+            
             
             <ul className="navbar-nav navbar-nav-right ml-lg-auto">
               
@@ -26,6 +24,9 @@ const TopNav = () => {
             </ul>
             <button className="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
               <span className="mdi mdi-menu"></span>
+            </button>
+            <button className="navbar-toggler navbar-toggler align-self-center mr-2" type="button" data-toggle="minimize">
+              <i className="mdi mdi-menu"></i>
             </button>
           </div>
         </nav>

@@ -1,0 +1,21 @@
+.block{
+    height: 150px;
+    width: 150px;
+    background-color: #172929;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 100px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 8px 0px;
+}
+.block:hover{
+    background-color: #274545;
+}
+.filled{
+    background-color: rgb(220, 99, 99);
+}
+.filled:hover{
+    background-color: rgb(220, 99, 99);
+}

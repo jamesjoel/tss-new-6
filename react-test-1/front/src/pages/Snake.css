@@ -1,0 +1,10 @@
+.block{
+    height: 110px;
+    width: 110px;
+    margin: 5px;
+    background-color: #303030;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
