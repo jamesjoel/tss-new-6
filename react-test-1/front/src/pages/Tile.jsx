@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import "./TikTakTok.css"
 
 const Tile = ({onClick, index, item}) => {
     

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './components/Header'
 import { Outlet, Route, Routes, useNavigate } from 'react-router-dom'
 import Home from './pages/Home'
@@ -11,13 +11,21 @@ import Product from './pages/Product'
 import EMI from './pages/EMI'
 import TikTakTok from './pages/TikTakTok'
 import SnakeLadder from './pages/SnakeLadder'
+import Demo from './pages/Demo'
+import Demo2 from './pages/Demo2'
+import LogoContext from './pages/LogoContext'
 
 const App = () => {
+  let logo = useState("My Project")
+  // ["My Project", fn]
   return (
     <>
+    <LogoContext.Provider value={logo}>
     <Header />
     <Routes>
       <Route path='/' element={<Home />} />
+      <Route path='/demo' element={<Demo />} />
+      <Route path='/demo2' element={<Demo2 />} />
       <Route path='/emi' element={<EMI />} />
       <Route path='/snake' element={<SnakeLadder />} />
       <Route path='/tik' element={<TikTakTok />} />
@@ -37,6 +45,7 @@ const App = () => {
         <Route path='/student/edit/:id' element={<AddStudent />} />
       </Route>
     </Routes>
+    </LogoContext.Provider>
     </>
   )
 }

@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import "./TikTakTok.css"
 import Tile from './Tile'
+import {useDispatch} from 'react-redux'
+
+import {firstPlayerMove, secondPlayerMove} from '../redux/PlayerSlice'
 
 const WinArr = [
     [0, 1, 2],
@@ -14,6 +17,7 @@ const WinArr = [
 ]
 
 const TikTakTok = () => {
+    let disptach = useDispatch();
     // Array.from({length : 9})
     let [arr, setArr] = useState(Array.from({length : 9}))
 
@@ -32,7 +36,13 @@ const TikTakTok = () => {
             return;
         }
 
+        if(currPlayer=="f"){
+            disptach(firstPlayerMove())
+        }
+        if(currPlayer=="s"){
+            disptach(secondPlayerMove())
 
+        }
         let place = currPlayer == "f" ? "X" : "O";
         tempArr[value] = place;
         setArr(tempArr);

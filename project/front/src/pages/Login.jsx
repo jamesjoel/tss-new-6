@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import {useFormik} from 'formik'
 import LoginSchema from '../schema/LoginSchema'
 import {API_URL} from '../config/API'
 import axios from 'axios'
+import AuthContext from '../context/AuthContext'
 
 import { ToastContainer, toast } from 'react-toastify'
 import { useEffect } from 'react'
 
 const Login = () => {
+    let logged = useContext(AuthContext);
     let navigate = useNavigate();
     useEffect(()=>{
         if(localStorage.getItem("access_user")){
@@ -38,6 +40,7 @@ const Login = () => {
                     // {success:true, name : "", token : ""}
                     localStorage.setItem("name", response.data.name);
                     localStorage.setItem("access_user", response.data.token);
+                    logged[1](true)
                     toast("You are successful Logged In ....", {
                         onClose : ()=>navigate("/")
                     })

@@ -2,13 +2,15 @@
 import {NavLink} from 'react-router-dom';
 import axios from 'axios';
 import {API_URL} from '../config/API';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useEffect } from 'react';
+import AuthContext from '../context/AuthContext';
 
 
 import './Header.css'
 
 const Header = () => {
+   let logged = useContext(AuthContext);
 
    let [allCate, setAllCate] = useState([])
 
@@ -74,7 +76,7 @@ const Header = () => {
                         <NavLink className="nav-link" to="/contact">Contact</NavLink>
                      </li>
                      {
-                        localStorage.getItem("access_user")
+                        logged[0]
                         ?
                         <li className="nav-item dropdown user-dropdown">
                         <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span className="nav-label">{localStorage.getItem("name")} <span className="caret"></span></span></a>

@@ -1,9 +1,13 @@
 import { useFormik } from 'formik'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import axios from 'axios'
+import LogoContext from './LogoContext';
 import { useNavigate } from 'react-router-dom';
 
+
 const Login = () => {
+
+    let x = useContext(LogoContext)
 
     let [errMsg, setErrMsg] = useState("");
     let [loader, setLoader] = useState(false)
@@ -52,6 +56,7 @@ const Login = () => {
                 <p className='text-center text-danger'>{errMsg}</p>
             </div>
             </form>
+            <button onClick={()=>x[1]("The Stepping Stone")}>ok</button>
         </div>
     </div>
   )
