@@ -5,11 +5,13 @@ import {API_URL} from '../config/API';
 import { useState, useContext } from 'react';
 import { useEffect } from 'react';
 import AuthContext from '../context/AuthContext';
+import {useSelector} from 'react-redux'
 
 
 import './Header.css'
 
 const Header = () => {
+   let cartData = useSelector(state=>state.CartReducer)
    let logged = useContext(AuthContext);
 
    let [allCate, setAllCate] = useState([])
@@ -99,6 +101,11 @@ const Header = () => {
                         </>
                      }   
 
+                  </ul>
+                  <ul className='navbar-nav'>
+                     <li className='nav-item'>
+                        <NavLink className='nav-link' to="/mycart">My Cart ({cartData.length})</NavLink>
+                     </li>
                   </ul>
                </div>
             </nav>

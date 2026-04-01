@@ -55,6 +55,7 @@ const AllProducts = () => {
     }
 
     let getFilteredProduct = (obj = {}) => {
+        setShowLoading(true)
         let currUrlObj = Object.fromEntries(searchParam.entries())
         let newUrlObj = { ...currUrlObj, ...obj };
         // {color : red, size : M, min : 2000, max : 3000}
@@ -73,6 +74,7 @@ const AllProducts = () => {
             .get(`${import.meta.env.VITE_API_URL}/filter?${query}`)
             .then(response => {
                 setProduct(response.data.result);
+                setShowLoading(false)
             })
 
     }

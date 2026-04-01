@@ -7,9 +7,10 @@ import {Provider} from 'react-redux'
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 
 import PlayerSlice from './redux/PlayerSlice'
+import StudentSlice from './redux/StudentSlice.jsx'
 // import DemoSlice from './redux/DemoSlice'
 
-let rootReducer = combineReducers({ PlayerSlice })
+let rootReducer = combineReducers({ PlayerSlice, StudentSlice })
 
 let store = configureStore({
   reducer : rootReducer

@@ -1,30 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux';
+import { DeleteStu } from '../redux/StudentSlice';
 const Student = () => {
 
     let navigate = useNavigate();
+    let dispatch = useDispatch();
+    
+    let allStu = useSelector(state=>state.StudentSlice)
+   
 
-    let [allStu, setAllStu] = useState([])
-    useEffect(()=>{
-        axios
-        .get("http://localhost:3000/student")
-        .then(response=>{
-            setAllStu(response.data)
-        })
-    },[])
+    
 
-    let stuDelete = (stu)=>{
-        axios
-        .delete("http://localhost:3000/student/"+stu.id)
-        .then(response=>{
-            setAllStu(prev=>prev.filter(item=>item.id!=stu.id));
-        })
-    }
-
-    let stuEdit = (stu)=>{
-        navigate("/student/edit/"+stu.id)
-    }
+   
   return (
     <div className="container">
         <div className="row">
@@ -53,10 +41,10 @@ const Student = () => {
                                 <td>{item.contact}</td>
                                 <td>{item.class}</td>
                                 <td>
-                                    <button onClick={()=>stuEdit(item)} className='btn btn-warning'>Edit</button>
+                                    <button onClick={()=>navigate("/student/edit/"+item.id)} className='btn btn-warning'>Edit</button>
                                 </td>
                                 <td>
-                                    <button onClick={()=>stuDelete(item)} className='btn btn-danger'>Delete</button>
+                                    <button onClick={()=>dispatch(DeleteStu(item))} className='btn btn-danger'>Delete</button>
                                 </td>
                             </tr>)
                         }

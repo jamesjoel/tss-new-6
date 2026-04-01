@@ -32,7 +32,7 @@ const SideNav = () => {
           <li className="nav-item">
             <a className="nav-link" data-toggle="collapse" href="#cate" aria-expanded="false" aria-controls="ui-basic">
               <i className="mdi mdi-view-list menu-icon"></i>
-              <span className="menu-title">Category</span>
+              <span className="menu-title">Category (0)</span>
               <i className="menu-arrow"></i>
             </a>
             <div className="collapse" id="cate">

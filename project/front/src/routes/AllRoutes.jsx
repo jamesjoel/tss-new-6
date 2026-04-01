@@ -20,6 +20,7 @@ import MakePayment from '../pages/users/MakePayment'
 import ForgotPassword from '../pages/ForgotPassword'
 import Otp from '../pages/Otp'
 import ForgotPasswordUpdate from '../pages/ForgotPasswordUpdate'
+import MyCart from '../pages/MyCart'
 
 const AllRoutes = () => {
   return (
@@ -28,6 +29,7 @@ const AllRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/mycart" element={<MyCart />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/otp" element={<Otp />} />
           <Route path="/update-password" element={<ForgotPasswordUpdate />} />

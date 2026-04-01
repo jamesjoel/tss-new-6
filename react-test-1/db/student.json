@@ -1,18 +1,39 @@
 {
   "student": [
     {
-      "id": "eb1c",
-      "name": "Gaurav",
-      "fee": "5400",
-      "class": "3",
-      "contact": "541857484"
+      "id": "b0d5",
+      "name": "rohit",
+      "fee": "5000",
+      "class": "10",
+      "contact": "212154"
     },
     {
-      "id": "01a7",
-      "name": "Amar Johi",
+      "id": "4fb0",
+      "name": "gg",
+      "fee": "7000",
+      "class": "3",
+      "contact": "9893600500"
+    },
+    {
+      "id": "74f5",
+      "name": "Shweta Verma",
+      "fee": "4500",
+      "class": "10",
+      "contact": "9893600500"
+    },
+    {
+      "id": "2125",
+      "name": "gaurav",
       "fee": "8000",
+      "class": "10",
+      "contact": "9893600500"
+    },
+    {
+      "id": "9ff6",
+      "name": "ewrtert",
+      "fee": "4500",
       "class": "6",
-      "contact": "21545444"
+      "contact": "2154152154"
     }
   ]
 }

@@ -7,6 +7,8 @@ const Header = () => {
 
     let x = useContext(LogoContext)
 
+    let stuData = useSelector(state=>state.StudentSlice)
+
 
     let playerArr = useSelector(state=>state.PlayerSlice)
 
@@ -58,9 +60,9 @@ const Header = () => {
 
                     }
                     
-                    {/* <li className='nav-item'>
-                        <NavLink to="/student" className="nav-link">Student</NavLink>
-                    </li> */}
+                    <li className='nav-item'>
+                        <NavLink to="/student" className="nav-link">Student ({stuData.length})</NavLink>
+                    </li>
                 </ul>
                 <ul className='nav navbar-nav'>
                     <li className='nav-item'>

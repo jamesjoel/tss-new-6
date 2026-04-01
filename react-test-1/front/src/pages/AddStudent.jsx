@@ -3,11 +3,15 @@ import {useFormik} from 'formik'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { SaveStu, UpdateStu } from '../redux/StudentSlice'
 
 const AddStudent = () => {
+    let dispatch = useDispatch();
     let param = useParams();
     let navigate = useNavigate();
 
+    let allStu = useSelector(state=>state.StudentSlice);
 
     
 
@@ -20,30 +24,28 @@ const AddStudent = () => {
 
     useEffect(()=>{
         if(param.id){
-            axios
-            .get("http://localhost:3000/student/"+param.id)
-            .then(response=>{
-                setStu(response.data)
+            let obj = {};
+            allStu.forEach(item=>{
+                if(item.id == param.id){
+                    obj = item;
+                }
             })
+            setStu(obj);
         }
-    },[])    
+    },[allStu])    
 
     let stuFrm = useFormik({
         enableReinitialize : true,
         initialValues : stu,
         onSubmit : (formData)=>{
             if(param.id){
-                  axios
-            .put("http://localhost:3000/student/"+param.id, formData)
-            .then(response=>{
-                navigate("/student");
-            })
-            }else{
-                axios
-            .post("http://localhost:3000/student", formData)
-            .then(response=>{
-                navigate("/student");
-            })
+                dispatch(UpdateStu(formData));
+                navigate("/student")            
+            }
+            else{
+                
+                dispatch(SaveStu(formData));
+                navigate("/student")            
             }
         }
     })

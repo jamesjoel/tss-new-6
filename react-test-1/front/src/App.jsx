@@ -15,7 +15,14 @@ import Demo from './pages/Demo'
 import Demo2 from './pages/Demo2'
 import LogoContext from './pages/LogoContext'
 
+import { useDispatch } from 'react-redux'
+import { GetAllStu } from './redux/StudentSlice'
+
 const App = () => {
+  let dispatch = useDispatch();
+
+  dispatch(GetAllStu());
+
   let logo = useState("My Project")
   // ["My Project", fn]
   return (
